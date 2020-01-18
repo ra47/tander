@@ -21,6 +21,7 @@
 		11B5D82D23D2F0830003F974 /* mapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D82C23D2F0830003F974 /* mapView.swift */; };
 		11B5D82F23D2F3690003F974 /* SignInSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */; };
 		11B5D83123D3030E0003F974 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D83023D3030E0003F974 /* SignUpView.swift */; };
+		11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		11B5D82C23D2F0830003F974 /* mapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapView.swift; sourceTree = "<group>"; };
 		11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpView.swift; sourceTree = "<group>"; };
 		11B5D83023D3030E0003F974 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSignInSignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				11B5D82C23D2F0830003F974 /* mapView.swift */,
 				11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */,
 				11B5D83023D3030E0003F974 /* SignUpView.swift */,
+				11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			files = (
 				11182B6223D1C9E400DEBCDA /* SignInView.swift in Sources */,
 				11182B6023D1C80C00DEBCDA /* AccountsViewModel.swift in Sources */,
+				11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */,
 				11B5D82F23D2F3690003F974 /* SignInSignUpView.swift in Sources */,
 				11182B2A23D1C30D00DEBCDA /* AppDelegate.swift in Sources */,
 				11182B5E23D1C5AB00DEBCDA /* Account.swift in Sources */,
