@@ -12,6 +12,9 @@ struct Account : Decodable{
     
     let userid : String
     let username : String
+    let firstname : String
+    let lastname : String
+    let birthdate : String
     let email : String
     let telephone : String
     let owners : [String]
