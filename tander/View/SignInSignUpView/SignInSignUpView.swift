@@ -16,13 +16,7 @@ struct SignInSignUpView: View {
     @State var isSignUp : Bool = false
     
     
-    @State var user : String = ""
-    @State var pass : String = ""
-    @State var fname : String = ""
-    @State var lname : String = ""
-    @State var email : String = ""
-    @State var phone : String = ""
-    @State var birthdate = Date()
+     @EnvironmentObject var store: ProfileStore
     
     
     
@@ -46,25 +40,25 @@ struct SignInSignUpView: View {
                 //signin Form
                 if isSignIn {
                     VStack(alignment: .trailing) {
-                        
+
                         Text("USERNAME")
                             .font(.headline)
                             .padding([.top, .leading])
-                        TextField("Fill in the username", text: $user)
+                        TextField("Fill in the username", text: $store.user)
                             .padding()
                             .background(TextFieldColor)
                             .cornerRadius(5.0)
-                        
+
                         Divider().background(Color.black)
-                        
+
                         Text("PASSWORD")
                         .font(.headline)
                         .padding([.top, .leading])
-                        SecureField("Fill in password", text: $pass)
+                        SecureField("Fill in password", text: $store.pass)
                             .padding()
                             .background(TextFieldColor)
                             .cornerRadius(5.0)
-                        
+
                         Divider().background(Color.black)
                     }
                     .frame(width: 400, height: 200)
@@ -77,7 +71,7 @@ struct SignInSignUpView: View {
                                 Text("FIRSTNAME")
                                     .font(.headline)
                                     .padding([.top, .leading])
-                                TextField("Fill in firstname", text: $fname)
+                                TextField("Fill in firstname", text: $store.fname)
                                     .padding()
                                     .background(TextFieldColor)
                                     .cornerRadius(5.0)
@@ -86,7 +80,7 @@ struct SignInSignUpView: View {
                                 Text("LASTNAME")
                                     .font(.headline)
                                     .padding([.top, .leading])
-                                TextField("Fill in lastname", text: $lname)
+                                TextField("Fill in lastname", text: $store.lname)
                                     .padding()
                                     .background(TextFieldColor)
                                     .cornerRadius(5.0)
@@ -95,7 +89,7 @@ struct SignInSignUpView: View {
                                 Text("BIRTHDATE")
                                     .font(.headline)
                                     .padding([.top, .leading])
-                                DatePicker("Date",selection: $birthdate, displayedComponents: .date)
+                                DatePicker("Date",selection: $store.birthdate, displayedComponents: .date)
                                     .labelsHidden()
                                     Divider().background(Color.black)
 
@@ -105,7 +99,7 @@ struct SignInSignUpView: View {
                             Text("EMAIL")
                                 .font(.headline)
                                 .padding([.top, .leading])
-                            TextField("Fill in email", text: $email)
+                            TextField("Fill in email", text: $store.email)
                                 .padding()
                                 .background(TextFieldColor)
                                 .cornerRadius(5.0)
@@ -115,7 +109,7 @@ struct SignInSignUpView: View {
                             Text("PHONE")
                                 .font(.headline)
                                 .padding([.top, .leading])
-                            TextField("Fill in Phone", text: $email)
+                            TextField("Fill in Phone", text: $store.email)
                                 .padding()
                                 .background(TextFieldColor)
                                 .cornerRadius(5.0)
@@ -126,7 +120,7 @@ struct SignInSignUpView: View {
                                 Text("USERNAME")
                                     .font(.headline)
                                     .padding([.top, .leading])
-                                TextField("Fill in the username", text: $user)
+                                TextField("Fill in the username", text: $store.user)
                                     .padding()
                                     .background(TextFieldColor)
                                     .cornerRadius(5.0)
@@ -135,7 +129,7 @@ struct SignInSignUpView: View {
                                 Text("PASSWORD")
                                 .font(.headline)
                                 .padding([.top, .leading])
-                                SecureField("Fill in password", text: $pass)
+                                SecureField("Fill in password", text: $store.pass)
                                     .padding()
                                     .background(TextFieldColor)
                                     .cornerRadius(5.0)
@@ -154,6 +148,7 @@ struct SignInSignUpView: View {
                  Spacer()
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            
         }
         .offset(y: -self.value)
         .animation(.spring())
@@ -181,6 +176,6 @@ struct SignInSignUpView: View {
 
 struct SignInSignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInSignUpView()
+        SignInSignUpView().environmentObject(ProfileStore())
     }
 }
