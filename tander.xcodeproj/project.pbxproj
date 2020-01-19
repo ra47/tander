@@ -17,10 +17,8 @@
 		11182B4C23D1C30F00DEBCDA /* tanderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B4B23D1C30F00DEBCDA /* tanderUITests.swift */; };
 		11182B5E23D1C5AB00DEBCDA /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B5D23D1C5AB00DEBCDA /* Account.swift */; };
 		11182B6023D1C80C00DEBCDA /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B5F23D1C80C00DEBCDA /* AccountsViewModel.swift */; };
-		11182B6223D1C9E400DEBCDA /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B6123D1C9E400DEBCDA /* SignInView.swift */; };
 		11B5D82D23D2F0830003F974 /* mapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D82C23D2F0830003F974 /* mapView.swift */; };
 		11B5D82F23D2F3690003F974 /* SignInSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */; };
-		11B5D83123D3030E0003F974 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D83023D3030E0003F974 /* SignUpView.swift */; };
 		11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,10 +57,8 @@
 		11182B4D23D1C30F00DEBCDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11182B5D23D1C5AB00DEBCDA /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		11182B5F23D1C80C00DEBCDA /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
-		11182B6123D1C9E400DEBCDA /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		11B5D82C23D2F0830003F974 /* mapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapView.swift; sourceTree = "<group>"; };
 		11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpView.swift; sourceTree = "<group>"; };
-		11B5D83023D3030E0003F974 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSignInSignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,10 +179,8 @@
 		11182B5B23D1C52600DEBCDA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				11182B6123D1C9E400DEBCDA /* SignInView.swift */,
 				11B5D82C23D2F0830003F974 /* mapView.swift */,
 				11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */,
-				11B5D83023D3030E0003F974 /* SignUpView.swift */,
 				11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */,
 			);
 			path = View;
@@ -330,7 +324,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11182B6223D1C9E400DEBCDA /* SignInView.swift in Sources */,
 				11182B6023D1C80C00DEBCDA /* AccountsViewModel.swift in Sources */,
 				11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */,
 				11B5D82F23D2F3690003F974 /* SignInSignUpView.swift in Sources */,
@@ -338,7 +331,6 @@
 				11182B5E23D1C5AB00DEBCDA /* Account.swift in Sources */,
 				110757C723D1CE92003B5EB4 /* SignInWithAppleBtn.swift in Sources */,
 				11182B2C23D1C30D00DEBCDA /* SceneDelegate.swift in Sources */,
-				11B5D83123D3030E0003F974 /* SignUpView.swift in Sources */,
 				11B5D82D23D2F0830003F974 /* mapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
