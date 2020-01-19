@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Account : Decodable{
+struct Account : Codable{
     
     let userid : String
     let username : String

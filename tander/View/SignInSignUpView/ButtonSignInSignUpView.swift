@@ -14,7 +14,8 @@ struct ButtonSignInSignUpView: View {
     @Binding var isSignUp: Bool
     
     @State var firstTime: Bool = true
-    
+    @EnvironmentObject var store: ProfileStore
+
     var body: some View {
         
         VStack{
@@ -75,6 +76,7 @@ struct ButtonSignInSignUpView: View {
                     self.firstTime = false
                     self.isSignIn = false
                     self.isSignUp = true
+                    self.store.signUpBtnClicked()
                 }) {
                     Text("Sign Up")
                 }
@@ -129,6 +131,6 @@ struct ButtonSignInSignUpView_Previews: PreviewProvider {
     @State static var sn = false
     @State static var su = false
     static var previews: some View {
-        ButtonSignInSignUpView(isSignIn: $sn, isSignUp: $su)
+        ButtonSignInSignUpView(isSignIn: $sn, isSignUp: $su).environmentObject(ProfileStore())
     }
 }

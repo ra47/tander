@@ -39,12 +39,13 @@ class ProfileStore : ObservableObject {
     init() {}
     
     func signUpBtnClicked(){
-        
+         let bd = DateFormatter().string(from: birthdate)
         let account = [
+            "userid": user,
             "username": user,
             "firstname": fname,
             "lastname": lname,
-            "birthdate": birthdate,
+            "birthdate": bd,
             "email": email,
             "telephone": phone,
             "owners": owner
@@ -53,7 +54,6 @@ class ProfileStore : ObservableObject {
         WebServices.createProfile(account : account, callback: ResponseCallback(
             onSuccess:{
                 self.profileRegisterStatus = .Registered
-                self.errMsg = "Success"
                 print("Registered")
             },
             onFailure:{ statusCode in

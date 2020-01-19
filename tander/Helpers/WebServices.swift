@@ -22,7 +22,7 @@ class WebServices {
     }
     
     static func createProfile(account: [String: Any],callback: ResponseCallback<Void>) {
-        postJSON(url: baseUrl + "/addUser", body: account, callback: callback)
+        postJSON(url: baseUrl + "/users/addUser", body: account, callback: callback)
     }
     
     
@@ -39,9 +39,14 @@ class WebServices {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
-        let jsonBody = try? JSONSerialization.data(withJSONObject: body)
-        request.httpBody = jsonBody
-        
+          let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        print(finalBody)
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let decoder = JSONDecoder()
+        let user = try! decoder.decode(Account.self, from: finalBody)
+        print(user)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 if error != nil {

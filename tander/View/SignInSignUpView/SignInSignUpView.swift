@@ -92,6 +92,8 @@ struct SignInSignUpView: View {
                                 DatePicker("Date",selection: $store.birthdate, displayedComponents: .date)
                                     .labelsHidden()
                                     Divider().background(Color.black)
+                                
+                                Text(DateFormatter().string(from: store.birthdate))
 
                                 
                             }
@@ -109,7 +111,7 @@ struct SignInSignUpView: View {
                             Text("PHONE")
                                 .font(.headline)
                                 .padding([.top, .leading])
-                            TextField("Fill in Phone", text: $store.email)
+                            TextField("Fill in Phone", text: $store.phone)
                                 .padding()
                                 .background(TextFieldColor)
                                 .cornerRadius(5.0)
@@ -148,7 +150,9 @@ struct SignInSignUpView: View {
                  Spacer()
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            
+            .alert(isPresented: $store.showAlert) {
+                Alert(title: Text(store.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
+            }
         }
         .offset(y: -self.value)
         .animation(.spring())
@@ -176,6 +180,6 @@ struct SignInSignUpView: View {
 
 struct SignInSignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInSignUpView().environmentObject(ProfileStore())
+        SignInSignUpView()
     }
 }
