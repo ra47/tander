@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MapRootView: View {
-        
+    
     @State private var searchText = ""
     
     var body: some View {
@@ -21,13 +21,19 @@ struct MapRootView: View {
                 SearchBarView(searchText: $searchText)
                 
                 Map()
-                .navigationBarTitle(Text("Search"))
-                .resignKeyboardOnDragGesture()
+                    .navigationBarTitle(Text("Search"))
+                    .navigationBarItems(trailing: Button(action: {
+                        //do some stuff here may be sheet pop up
+                    }) {
+                        Text("Filter")
+                    })
+                    .resignKeyboardOnDragGesture()
             }
         }
     }
 }
 
+//force to resign keyboard
 extension UIApplication {
     func endEditing(_ force: Bool) {
         self.windows
@@ -37,7 +43,10 @@ extension UIApplication {
     }
 }
 
+// end editing when drag gesture on view
 struct ResignKeyboardOnDragGesture: ViewModifier {
+    
+    //if drag resign keyboard
     var gesture = DragGesture().onChanged{_ in
         UIApplication.shared.endEditing(true)
     }
@@ -46,18 +55,21 @@ struct ResignKeyboardOnDragGesture: ViewModifier {
     }
 }
 
+//make view can use this function
 extension View {
     func resignKeyboardOnDragGesture() -> some View {
         modifier(ResignKeyboardOnDragGesture())
     }
 }
 
-
+//Search bar on top
 struct SearchBarView: View {
     
     @Binding var searchText: String
     @State private var showCancelButton: Bool = false
-    var onCommit: () ->Void = {print("onCommit")}
+    
+    //do stuff when after pressed return
+    var onCommit: () -> Void = {print("onCommit")}
     
     var body: some View {
         HStack {
@@ -72,6 +84,7 @@ struct SearchBarView: View {
                     TextField("", text: $searchText, onEditingChanged: { isEditing in
                         self.showCancelButton = true
                     }, onCommit: onCommit).foregroundColor(.primary)
+                        .keyboardType(.default)
                 }
                 // Clear button
                 Button(action: {

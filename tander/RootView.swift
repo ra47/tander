@@ -9,32 +9,41 @@
 import SwiftUI
 
 struct RootView: View {
+    
+    @State private var selection = 2
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selection) {
             
-           Text("The content of the first view")
-             .tabItem {
-                Image(systemName: "dollarsign.circle.fill")
-                Text("Promotion")
+            Text("The content of the first view")
+                .tabItem {
+                    Image(systemName: "dollarsign.circle.fill")
+                    Text("Promotion")
             }
+            .tag(1)
             
             MapRootView()
                 .tabItem {
-                   Image(systemName: "map.fill")
-                   Text("Map")
-                 }
+                    Image(systemName: "map.fill")
+                    Text("Map")
+            }
+            .tag(2)
             
             Text("The content of the third view")
-            .tabItem {
-               Image(systemName: "person.3.fill")
-               Text("Nearby")
-             }
+                .tabItem {
+                    Image(systemName: "person.3.fill")
+                    Text("Nearby")
+            }
+            .tag(3)
             
-            Text("The content of the fourth view")
-            .tabItem {
-               Image(systemName: "person.crop.circle.fill")
-               Text("Profile")
-             }
+            
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person.crop.circle.fill")
+                    Text("Profile")
+            }
+            .tag(4)
+            
         }
     }
 }

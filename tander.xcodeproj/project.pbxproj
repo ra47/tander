@@ -18,6 +18,7 @@
 		11182B5E23D1C5AB00DEBCDA /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B5D23D1C5AB00DEBCDA /* Account.swift */; };
 		11182B6023D1C80C00DEBCDA /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B5F23D1C80C00DEBCDA /* AccountsViewModel.swift */; };
 		114BC38C23F1B9790016DD86 /* MapRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BC38B23F1B9790016DD86 /* MapRootView.swift */; };
+		114BC39423F2F3570016DD86 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BC39323F2F3570016DD86 /* ProfileView.swift */; };
 		1170E71D23D45D0100181873 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E71C23D45D0100181873 /* ProfileStore.swift */; };
 		1170E72123D466DB00181873 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E72023D466DB00181873 /* WebServices.swift */; };
 		1170E72323D46D6500181873 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E72223D46D6500181873 /* RootView.swift */; };
@@ -62,6 +63,7 @@
 		11182B5D23D1C5AB00DEBCDA /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		11182B5F23D1C80C00DEBCDA /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
 		114BC38B23F1B9790016DD86 /* MapRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRootView.swift; sourceTree = "<group>"; };
+		114BC39323F2F3570016DD86 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1170E71C23D45D0100181873 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		1170E72023D466DB00181873 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		1170E72223D46D6500181873 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		11182B5B23D1C52600DEBCDA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				114BC39223F2F3340016DD86 /* ProfileView */,
 				114BC38D23F1B9830016DD86 /* MapView */,
 				1170E71F23D466B100181873 /* SignInSignUpView */,
 			);
@@ -210,6 +213,14 @@
 				11B5D82C23D2F0830003F974 /* Map.swift */,
 			);
 			path = MapView;
+			sourceTree = "<group>";
+		};
+		114BC39223F2F3340016DD86 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				114BC39323F2F3570016DD86 /* ProfileView.swift */,
+			);
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		1170E71E23D45D0D00181873 /* Store */ = {
@@ -361,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11182B6023D1C80C00DEBCDA /* AccountsViewModel.swift in Sources */,
+				114BC39423F2F3570016DD86 /* ProfileView.swift in Sources */,
 				114BC38C23F1B9790016DD86 /* MapRootView.swift in Sources */,
 				11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */,
 				11B5D82F23D2F3690003F974 /* SignInSignUpView.swift in Sources */,
