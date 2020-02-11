@@ -12,9 +12,23 @@ struct ProfileView: View {
     var body: some View {
         NavigationView{
             VStack{
+                
+                Image("profile")
+                    .frame(width: 200, height: 200)
+                    
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle().stroke(Color.white, lineWidth: 4))
+                    .shadow(radius: 10)
+                    
+                    
+                
+                
                 Text("Hello")
                     .navigationBarTitle(Text("Profile"), displayMode: .inline)
+                Spacer()
             }
+            .padding()
         }
     }
 }

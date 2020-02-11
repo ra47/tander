@@ -40,13 +40,14 @@ class WebServices {
         request.httpMethod = "POST"
 
           let finalBody = try! JSONSerialization.data(withJSONObject: body)
-        print(finalBody)
+        
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let decoder = JSONDecoder()
-        let user = try! decoder.decode(Account.self, from: finalBody)
-        print(user)
+        //check http body
+//        let decoder = JSONDecoder()
+//        let user = try! decoder.decode(Account.self, from: finalBody)
+//        print(user)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 if error != nil {

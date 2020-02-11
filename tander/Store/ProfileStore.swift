@@ -24,6 +24,15 @@ class ProfileStore : ObservableObject {
         }
     }
     
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter
+    }
+    
+    
     @Published var user : String = ""
     @Published var pass : String = ""
     @Published var fname : String = ""
@@ -39,7 +48,8 @@ class ProfileStore : ObservableObject {
     init() {}
     
     func signUpBtnClicked(){
-         let bd = DateFormatter().string(from: birthdate)
+        let bd = dateFormatter.string(from: birthdate)
+        print(bd)
         let account = [
             "userid": user,
             "username": user,
@@ -61,7 +71,7 @@ class ProfileStore : ObservableObject {
             },
             onError:{ errMsg in
                 self.errMsg = "\(errMsg)"
-                
+
         }))
     }
 }

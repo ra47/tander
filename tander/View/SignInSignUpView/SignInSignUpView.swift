@@ -80,13 +80,13 @@ struct SignInSignUpView: View {
                             Divider().background(Color.black)
                             
                             CustomText(title: "BIRTHDATE")
-                            DatePicker("Date",selection: $store.birthdate, displayedComponents: .date)
+                            DatePicker("Date",selection: $store.birthdate,
+                                       in: ...Date().addingTimeInterval(-378_432_000),
+                                       displayedComponents: .date
+                                    )
                                 .labelsHidden()
                             Divider().background(Color.black)
-                            
-                            Text(DateFormatter().string(from: store.birthdate))
-                            
-                            
+                                            
                         }
                         
                         CustomText(title: "EMAIL")

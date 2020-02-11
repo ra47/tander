@@ -136,7 +136,6 @@
 				11182B5923D1C51900DEBCDA /* Model */,
 				1170E71E23D45D0D00181873 /* Store */,
 				11182B2923D1C30D00DEBCDA /* AppDelegate.swift */,
-				1170E72223D46D6500181873 /* RootView.swift */,
 				11182B2B23D1C30D00DEBCDA /* SceneDelegate.swift */,
 				11182B2F23D1C30F00DEBCDA /* Assets.xcassets */,
 				11182B3423D1C30F00DEBCDA /* LaunchScreen.storyboard */,
@@ -191,6 +190,7 @@
 		11182B5B23D1C52600DEBCDA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1170E72223D46D6500181873 /* RootView.swift */,
 				114BC39223F2F3340016DD86 /* ProfileView */,
 				114BC38D23F1B9830016DD86 /* MapView */,
 				1170E71F23D466B100181873 /* SignInSignUpView */,
