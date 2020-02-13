@@ -15,14 +15,19 @@ struct ResponseCallback<T> {
 }
 
 class WebServices {
-    private static var baseUrl = "http://localhost:9000"
-    
+    private static var baseUrl = "https://tander-webservice.herokuapp.com"
+
+
     private init(){
         
     }
     
     static func createProfile(account: [String: Any],callback: ResponseCallback<Void>) {
-        postJSON(url: baseUrl + "/users/addUser", body: account, callback: callback)
+        postJSON(url: baseUrl + "/users", body: account, callback: callback)
+    }
+    
+    static func login(user: [String: Any],callback: ResponseCallback<token>){
+        signIn(url: baseUrl + "/users/login/", body: user, type: token.self, callback: callback)
     }
     
     
@@ -32,29 +37,71 @@ class WebServices {
     
     
     
+    static func fetchJSON<T: Decodable>(url: String, headers: [String: String]? = nil, type: T.Type, callback: ResponseCallback<T>) {
+        guard let url = URL(string: url) else { return }
+        
+        var request = URLRequest(url: url)
+        
+        headers?.forEach { key, value in
+            request.addValue("Bearer \(value)", forHTTPHeaderField: key)
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                DispatchQueue.main.async {
+                    callback.onError("Fetch Error: " + error!.localizedDescription)
+                }
+            }
+            
+            guard let data = data else { return }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if (httpResponse.statusCode == 200) {
+                    do {
+                        let jsonData = try JSONDecoder().decode(type, from: data)
+                        
+                        print(jsonData)
+                        
+                        DispatchQueue.main.async {
+                            callback.onSuccess(jsonData)
+                        }
+                        
+                    } catch let jsonError {
+                        DispatchQueue.main.async {
+                            callback.onError("JSON Parse Error: " + jsonError.localizedDescription)
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        callback.onFailure(httpResponse.statusCode)
+                    }
+                }
+            }
+        }.resume()
+    }
     
     static func postJSON(url: String, body : [String: Any], callback: ResponseCallback<Void>){
         guard let url = URL(string: url) else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-
-          let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         //check http body
-//        let decoder = JSONDecoder()
-//        let user = try! decoder.decode(Account.self, from: finalBody)
-//        print(user)
+        //        let decoder = JSONDecoder()
+        //        let user = try! decoder.decode(Account.self, from: finalBody)
+        //        print(user)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 if error != nil {
                     callback.onError("Fetch Error: " + error!.localizedDescription)
                     return
                 }
-
+                
                 if let httpResponse = response as? HTTPURLResponse {
                     if (httpResponse.statusCode == 200) {
                         callback.onSuccess(Void())
@@ -66,4 +113,61 @@ class WebServices {
         }.resume()
         
     }
+    
+    static func signIn<T: Decodable>(url: String, body: [String: Any], type: T.Type , callback: ResponseCallback<T>){
+        guard let url = URL(string: url) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
+        //check http body
+        //        let decoder = JSONDecoder()
+        //        let user = try! decoder.decode(Account.self, from: finalBody)
+        //        print(user)
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    callback.onError("Fetch Error: " + error!.localizedDescription)
+                    return
+                }
+                
+                guard let data = data else { return }
+                
+            
+                if let httpResponse = response as? HTTPURLResponse {
+                    if (httpResponse.statusCode == 200) {
+                        do {
+                            let jsonData = try JSONDecoder().decode(type, from: data)
+                            
+                            print("token from server \(jsonData)")
+                            
+                            DispatchQueue.main.async {
+                                callback.onSuccess(jsonData)
+                            }
+                            
+                        } catch let jsonError {
+                            DispatchQueue.main.async {
+                                callback.onError("JSON Parse Error: " + jsonError.localizedDescription)
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            callback.onFailure(httpResponse.statusCode)
+                        }
+                    }
+                }
+            }
+        }.resume()
+        
+    }
+}
+
+struct token: Codable {
+    var accessToken: String
 }

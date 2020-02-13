@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import KeychainSwift
 
-enum ProfileRegisterStatus {
-    case Loading, NotRegistered, Registered
+enum ProfileSignInStatus {
+    case Loading, NotSignedIn, SignedIn
 }
 
 class ProfileStore : ObservableObject {
     
     @Published var showAlert = false
-
+    
+    var keychain = KeychainSwift()
+    //var token: String
     var errMsg: String? {
         didSet {
             if errMsg != nil {
@@ -42,10 +45,15 @@ class ProfileStore : ObservableObject {
     @Published var owner = [String]()
     @Published var birthdate = Date()
     
-    @Published var profileRegisterStatus = ProfileRegisterStatus.Loading
-
-    
     init() {}
+    
+    @Published var profileSignInStatus = ProfileSignInStatus.Loading {
+        didSet {
+            if (profileSignInStatus == .Loading){
+                
+            }
+        }
+    }
     
     func signUpBtnClicked(){
         let bd = dateFormatter.string(from: birthdate)
@@ -53,25 +61,50 @@ class ProfileStore : ObservableObject {
         let account = [
             "userid": user,
             "username": user,
+            "password": pass,
             "firstname": fname,
             "lastname": lname,
             "birthdate": bd,
             "email": email,
             "telephone": phone,
+            "role" : "user",
             "owners": owner
             ] as [String : Any]
         
         WebServices.createProfile(account : account, callback: ResponseCallback(
             onSuccess:{
-                self.profileRegisterStatus = .Registered
+                self.profileSignInStatus = .NotSignedIn
+                self.errMsg = "Registered"
                 print("Registered")
-            },
+        },
             onFailure:{ statusCode in
                 self.errMsg = "\(statusCode)"
-            },
+        },
             onError:{ errMsg in
                 self.errMsg = "\(errMsg)"
-
+                
+        }))
+    }
+    
+    func signInBtnClicked(){
+        let account = [
+            "username": user,
+            "password": pass,
+        ]
+        
+        print("token in keychain \(self.keychain.get("accessToken")!)")
+        
+        WebServices.login(user: account, callback: ResponseCallback(
+            onSuccess: { token in
+                self.keychain.set(token.accessToken, forKey: "accessToken")
+                self.profileSignInStatus = .SignedIn
+                print("loggedIn")
+        },
+            onFailure: { statusCode in
+                self.errMsg = "\(statusCode)"
+        },
+            onError: { (errMsg) in
+                self.errMsg = "\(errMsg)"
         }))
     }
 }

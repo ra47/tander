@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct RootView: View {
-    
     @State private var selection = 2
     
     var body: some View {

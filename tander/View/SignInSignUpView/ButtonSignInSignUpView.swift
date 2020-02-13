@@ -50,6 +50,7 @@ struct ButtonSignInSignUpView: View {
                     self.firstTime = false
                     self.isSignUp = false
                     self.isSignIn = true
+                    self.store.signInBtnClicked()
                     
                 }) {
                     Text(isSignIn ? "Login" : "Sign In" )
