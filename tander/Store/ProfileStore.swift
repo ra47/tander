@@ -16,6 +16,7 @@ enum ProfileSignInStatus {
 class ProfileStore : ObservableObject {
     
     @Published var showAlert = false
+    @Published var isShowing = false
     
     var keychain = KeychainSwift()
     //var token: String
@@ -87,6 +88,8 @@ class ProfileStore : ObservableObject {
     }
     
     func signInBtnClicked(){
+        
+        isShowing.toggle()
         let account = [
             "username": user,
             "password": pass,
@@ -99,11 +102,15 @@ class ProfileStore : ObservableObject {
                 self.keychain.set(token.accessToken, forKey: "accessToken")
                 self.profileSignInStatus = .SignedIn
                 print("loggedIn")
+                self.isShowing.toggle()
+
         },
             onFailure: { statusCode in
+                self.isShowing.toggle()
                 self.errMsg = "\(statusCode)"
         },
             onError: { (errMsg) in
+                self.isShowing.toggle()
                 self.errMsg = "\(errMsg)"
         }))
     }

@@ -23,141 +23,143 @@ struct SignInSignUpView: View {
     @State var value: CGFloat = 0
     
     var body: some View {
-        ScrollView {
-            VStack{
-                
-                Image("tander")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 250.0, height: 250.0)
-                    .padding(.top, 30.0)
-                
-                Text("Tander")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-                
-                //signin Form
-                if isSignIn {
-                    VStack(alignment: .trailing) {
-                        
-                        CustomText(title: "USERNAME")
-                        TextField("Fill in the username", text: $store.user)
-                            .padding()
-                            .background(TextFieldColor)
-                            .cornerRadius(5.0)
-                        
-                        Divider().background(Color.black)
-                        
-                        CustomText(title: "PASSWORD")
-                        SecureField("Fill in password", text: $store.pass)
-                            .padding()
-                            .background(TextFieldColor)
-                            .cornerRadius(5.0)
-                        
-                        Divider().background(Color.black)
-                        
-                    }
-                    .frame(width: 400, height: 200)
-                    .padding(.top , 30)
-                }
-                //signup Form
-                if isSignUp {
-                    VStack(alignment: .trailing) {
-                        Group{
-                            CustomText(title: "FIRSTNAME")
-                            TextField("Fill in firstname", text: $store.fname)
-                                .padding()
-                                .background(TextFieldColor)
-                                .cornerRadius(5.0)
-                            Divider().background(Color.black)
+        LoadingView {
+            ScrollView {
+                VStack{
+                    
+                    Image("tander")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 250.0, height: 250.0)
+                        .padding(.top, 30.0)
+                    
+                    Text("Tander")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    //signin Form
+                    if self.isSignIn {
+                        VStack(alignment: .trailing) {
                             
-                            CustomText(title: "LASTNAME")
-                            TextField("Fill in lastname", text: $store.lname)
-                                .padding()
-                                .background(TextFieldColor)
-                                .cornerRadius(5.0)
-                            Divider().background(Color.black)
-                            
-                            CustomText(title: "BIRTHDATE")
-                            DatePicker("Date",selection: $store.birthdate,
-                                       in: ...Date().addingTimeInterval(-378_432_000),
-                                       displayedComponents: .date
-                                    )
-                                .labelsHidden()
-                            Divider().background(Color.black)
-                                            
-                        }
-                        
-                        CustomText(title: "EMAIL")
-                        TextField("Fill in email", text: $store.email)
-                            .padding()
-                            .background(TextFieldColor)
-                            .cornerRadius(5.0)
-                            .keyboardType(.emailAddress)
-                        Divider().background(Color.black)
-                        
-                        CustomText(title: "PHONE")
-                        TextField("Fill in Phone", text: $store.phone)
-                            .padding()
-                            .background(TextFieldColor)
-                            .cornerRadius(5.0)
-                            .keyboardType(.numberPad)
-                        Divider().background(Color.black)
-                        
-                        Group{
                             CustomText(title: "USERNAME")
-                            TextField("Fill in the username", text: $store.user)
+                            TextField("Fill in the username", text: self.$store.user)
                                 .padding()
-                                .background(TextFieldColor)
+                                .background(self.TextFieldColor)
                                 .cornerRadius(5.0)
+                            
                             Divider().background(Color.black)
                             
                             CustomText(title: "PASSWORD")
-                            SecureField("Fill in password", text: $store.pass)
+                            SecureField("Fill in password", text: self.$store.pass)
                                 .padding()
-                                .background(TextFieldColor)
+                                .background(self.TextFieldColor)
                                 .cornerRadius(5.0)
+                            
                             Divider().background(Color.black)
+                            
                         }
-                        
-                        //Spacer()
+                        .frame(width: 400, height: 200)
+                        .padding(.top , 30)
                     }
-                    .frame(width: 400)
-                    .padding(.top , 30.0)
+                    //signup Form
+                    if self.isSignUp {
+                        VStack(alignment: .trailing) {
+                            Group{
+                                CustomText(title: "FIRSTNAME")
+                                TextField("Fill in firstname", text: self.$store.fname)
+                                    .padding()
+                                    .background(self.TextFieldColor)
+                                    .cornerRadius(5.0)
+                                Divider().background(Color.black)
+                                
+                                CustomText(title: "LASTNAME")
+                                TextField("Fill in lastname", text: self.$store.lname)
+                                    .padding()
+                                    .background(self.TextFieldColor)
+                                    .cornerRadius(5.0)
+                                Divider().background(Color.black)
+                                
+                                CustomText(title: "BIRTHDATE")
+                                DatePicker("Date",selection: self.$store.birthdate,
+                                           in: ...Date().addingTimeInterval(-378_432_000),
+                                           displayedComponents: .date
+                                        )
+                                    .labelsHidden()
+                                Divider().background(Color.black)
+                                                
+                            }
+                            
+                            CustomText(title: "EMAIL")
+                            TextField("Fill in email", text: self.$store.email)
+                                .padding()
+                                .background(self.TextFieldColor)
+                                .cornerRadius(5.0)
+                                .keyboardType(.emailAddress)
+                            Divider().background(Color.black)
+                            
+                            CustomText(title: "PHONE")
+                            TextField("Fill in Phone", text: self.$store.phone)
+                                .padding()
+                                .background(self.TextFieldColor)
+                                .cornerRadius(5.0)
+                                .keyboardType(.numberPad)
+                            Divider().background(Color.black)
+                            
+                            Group{
+                                CustomText(title: "USERNAME")
+                                TextField("Fill in the username", text: self.$store.user)
+                                    .padding()
+                                    .background(self.TextFieldColor)
+                                    .cornerRadius(5.0)
+                                Divider().background(Color.black)
+                                
+                                CustomText(title: "PASSWORD")
+                                SecureField("Fill in password", text: self.$store.pass)
+                                    .padding()
+                                    .background(self.TextFieldColor)
+                                    .cornerRadius(5.0)
+                                Divider().background(Color.black)
+                            }
+                            
+                            //Spacer()
+                        }
+                        .frame(width: 400)
+                        .padding(.top , 30.0)
+                        
+                    }
                     
+                    ButtonSignInSignUpView(isSignIn: self.$isSignIn, isSignUp: self.$isSignUp)
+                    
+                    Spacer()
                 }
-                
-                ButtonSignInSignUpView(isSignIn: $isSignIn, isSignUp: $isSignUp)
-                
-                Spacer()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                .alert(isPresented: self.$store.showAlert) {
+                    Alert(title: Text(self.store.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
+                }
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .alert(isPresented: $store.showAlert) {
-                Alert(title: Text(store.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
+            .offset(y: -self.value)
+            .animation(.spring())
+                //keyboard Detection
+                .onAppear{
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification, object: nil, queue: .main){
+                        (noti) in
+                        
+                        let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                        
+                        let height = value.height
+                        self.value = height
+                    }
+                    
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main){
+                        (noti) in
+                        
+                        self.value = 0
+                    }
             }
+            .background(Color(red: 255 / 255, green: 153 / 255, blue: 153 / 255))
+            .edgesIgnoringSafeArea(.all)
         }
-        .offset(y: -self.value)
-        .animation(.spring())
-            //keyboard Detection
-            .onAppear{
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification, object: nil, queue: .main){
-                    (noti) in
-                    
-                    let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-                    
-                    let height = value.height
-                    self.value = height
-                }
-                
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main){
-                    (noti) in
-                    
-                    self.value = 0
-                }
-        }
-        .background(Color(red: 255 / 255, green: 153 / 255, blue: 153 / 255))
-        .edgesIgnoringSafeArea(.all)
     }
 }
 
