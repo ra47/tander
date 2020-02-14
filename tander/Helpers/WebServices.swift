@@ -14,6 +14,8 @@ struct ResponseCallback<T> {
     var onError: (String) -> Void
 }
 
+//Header Authorization value Bearer "token"
+
 class WebServices {
     private static var baseUrl = "https://tander-webservice.herokuapp.com"
 
@@ -26,8 +28,12 @@ class WebServices {
         postJSON(url: baseUrl + "/users", body: account, callback: callback)
     }
     
-    static func login(user: [String: Any],callback: ResponseCallback<token>){
-        signIn(url: baseUrl + "/users/login/", body: user, type: token.self, callback: callback)
+    static func login(account: [String: Any],callback: ResponseCallback<Token>){
+        signIn(url: baseUrl + "/users/login/", body: account, type: Token.self, callback: callback)
+    }
+    
+    static func verify(user: [String: Any],callback: ResponseCallback<Void>){
+        postJSON(url: baseUrl + "/users/verify", body: user, callback: callback)
     }
     
     
@@ -166,8 +172,4 @@ class WebServices {
         }.resume()
         
     }
-}
-
-struct token: Codable {
-    var accessToken: String
 }

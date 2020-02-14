@@ -8,14 +8,16 @@
 
 import SwiftUI
 
-struct ViewDecider: View {
+struct ContentView: View {
     @EnvironmentObject var store: ProfileStore
-
+    
     var body: some View {
         VStack{
             getview().alert(isPresented: $store.showAlert) {
                 Alert(title: Text(store.errMsg!), dismissButton: Alert.Button.default(Text("Retry"),action: {self.store.profileSignInStatus = .Loading}))
             }
+        } .alert(isPresented: self.$store.showWelcome) {
+            Alert(title: Text("Successful Registered"), message:  Text(self.store.welMsg!), dismissButton: Alert.Button.default(Text("OK")))
         }
     }
     
@@ -34,8 +36,8 @@ struct ViewDecider: View {
     
 }
 
-struct ViewDecider_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ViewDecider()
+        ContentView()
     }
 }
