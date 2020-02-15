@@ -37,8 +37,12 @@ class WebServices {
     }
     
     // get user info by username
-    static func getUser(name: String, token: String, callback: ResponseCallback<[Account]>){
-        fetchJSON(url: baseUrl + "/users/\(name)", headers: ["Authorization": token], type: [Account].self, callback: callback)
+    static func getUser(name: String, token: String, callback: ResponseCallback<Account>){
+        fetchJSON(url: baseUrl + "/users/\(name)", headers: ["Authorization": token], type: Account.self, callback: callback)
+    }
+    
+    static func searchRestaurant(name: String, token: String, callback: ResponseCallback<[Restaurant]>){
+        fetchJSON(url: baseUrl + "/restaurants/\(name)", type: [Restaurant].self, callback: callback)
     }
     
     

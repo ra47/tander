@@ -9,5 +9,5 @@
 import SwiftUI
 
 struct Token: Codable {
-    var accessToken: String
+    let accessToken: String
 }

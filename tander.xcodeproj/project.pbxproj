@@ -16,7 +16,8 @@
 		11182B4123D1C30F00DEBCDA /* tanderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B4023D1C30F00DEBCDA /* tanderTests.swift */; };
 		11182B4C23D1C30F00DEBCDA /* tanderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B4B23D1C30F00DEBCDA /* tanderUITests.swift */; };
 		11182B5E23D1C5AB00DEBCDA /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B5D23D1C5AB00DEBCDA /* Account.swift */; };
-		11182B6023D1C80C00DEBCDA /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B5F23D1C80C00DEBCDA /* AccountsViewModel.swift */; };
+		111BB46223F7E72700CE4420 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111BB46123F7E72700CE4420 /* Restaurant.swift */; };
+		111BB46423F7E74C00CE4420 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111BB46323F7E74C00CE4420 /* MapViewModel.swift */; };
 		114BC38C23F1B9790016DD86 /* MapRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BC38B23F1B9790016DD86 /* MapRootView.swift */; };
 		114BC39423F2F3570016DD86 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BC39323F2F3570016DD86 /* ProfileView.swift */; };
 		116B1FB123F5AB3A005D51AE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 116B1FB023F5AB3A005D51AE /* LICENSE */; };
@@ -66,7 +67,8 @@
 		11182B4B23D1C30F00DEBCDA /* tanderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tanderUITests.swift; sourceTree = "<group>"; };
 		11182B4D23D1C30F00DEBCDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11182B5D23D1C5AB00DEBCDA /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		11182B5F23D1C80C00DEBCDA /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
+		111BB46123F7E72700CE4420 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		111BB46323F7E74C00CE4420 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		114BC38B23F1B9790016DD86 /* MapRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRootView.swift; sourceTree = "<group>"; };
 		114BC39323F2F3570016DD86 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		116B1FB023F5AB3A005D51AE /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			children = (
 				11182B5D23D1C5AB00DEBCDA /* Account.swift */,
 				118EAC3423F6A60D00D2DAC0 /* Token.swift */,
+				111BB46123F7E72700CE4420 /* Restaurant.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,7 +203,7 @@
 		11182B5A23D1C51F00DEBCDA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				11182B5F23D1C80C00DEBCDA /* AccountsViewModel.swift */,
+				111BB46323F7E74C00CE4420 /* MapViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -452,7 +455,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11182B6023D1C80C00DEBCDA /* AccountsViewModel.swift in Sources */,
 				114BC39423F2F3570016DD86 /* ProfileView.swift in Sources */,
 				114BC38C23F1B9790016DD86 /* MapRootView.swift in Sources */,
 				11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */,
@@ -466,6 +468,8 @@
 				116B1FB323F5B32C005D51AE /* ContentView.swift in Sources */,
 				1170E72123D466DB00181873 /* WebServices.swift in Sources */,
 				110757C723D1CE92003B5EB4 /* SignInWithAppleBtn.swift in Sources */,
+				111BB46423F7E74C00CE4420 /* MapViewModel.swift in Sources */,
+				111BB46223F7E72700CE4420 /* Restaurant.swift in Sources */,
 				11182B2C23D1C30D00DEBCDA /* SceneDelegate.swift in Sources */,
 				11B5D82D23D2F0830003F974 /* Map.swift in Sources */,
 			);

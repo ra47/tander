@@ -78,8 +78,8 @@ class ProfileStore : ObservableObject {
         
         if let token = keychain.get("accessToken") , let user = keychain.get("username"){
             WebServices.getUser(name: user, token: token, callback: ResponseCallback(onSuccess: { account in
-                print(account[0])
-                self.account = account[0]
+                print(account)
+                self.account = account
             }, onFailure: { (statusCode) in
                 self.errMsg = "Cant Get User Information \(statusCode)"
             }, onError: { (errMsg) in
