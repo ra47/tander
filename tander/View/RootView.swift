@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct RootView: View {
+    @EnvironmentObject var store:ProfileStore
     @State private var selection = 2
     
     var body: some View {
@@ -36,13 +37,13 @@ struct RootView: View {
             .tag(3)
             
             
-            ProfileView()
+            ProfileView().environmentObject(ProfileStore())
                 .tabItem {
                     Image(systemName: "person.crop.circle.fill")
                     Text("Profile")
             }
             .tag(4)
-            
+                        
         }
     }
 }

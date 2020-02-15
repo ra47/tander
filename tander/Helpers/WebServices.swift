@@ -24,16 +24,21 @@ class WebServices {
         
     }
     
-    static func createProfile(account: [String: Any],callback: ResponseCallback<Void>) {
+    static func createProfile(account: [String: Any], callback: ResponseCallback<Void>) {
         postJSON(url: baseUrl + "/users", body: account, callback: callback)
     }
     
-    static func login(account: [String: Any],callback: ResponseCallback<Token>){
+    static func login(account: [String: Any], callback: ResponseCallback<Token>){
         signIn(url: baseUrl + "/users/login/", body: account, type: Token.self, callback: callback)
     }
     
-    static func verify(user: [String: Any],callback: ResponseCallback<Void>){
+    static func verify(user: [String: Any], callback: ResponseCallback<Void>){
         postJSON(url: baseUrl + "/users/verify", body: user, callback: callback)
+    }
+    
+    // get user info by username
+    static func getUser(name: String, token: String, callback: ResponseCallback<[Account]>){
+        fetchJSON(url: baseUrl + "/users/\(name)", headers: ["Authorization": token], type: [Account].self, callback: callback)
     }
     
     
@@ -47,7 +52,6 @@ class WebServices {
         guard let url = URL(string: url) else { return }
         
         var request = URLRequest(url: url)
-        
         headers?.forEach { key, value in
             request.addValue("Bearer \(value)", forHTTPHeaderField: key)
         }
@@ -64,8 +68,8 @@ class WebServices {
             if let httpResponse = response as? HTTPURLResponse {
                 if (httpResponse.statusCode == 200) {
                     do {
-                        let jsonData = try JSONDecoder().decode(type, from: data)
-                        
+                        let decoder = JSONDecoder()
+                        let jsonData = try decoder.decode(type, from: data)
                         print(jsonData)
                         
                         DispatchQueue.main.async {
@@ -131,11 +135,6 @@ class WebServices {
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        
-        //check http body
-        //        let decoder = JSONDecoder()
-        //        let user = try! decoder.decode(Account.self, from: finalBody)
-        //        print(user)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 if error != nil {

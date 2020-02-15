@@ -10,12 +10,14 @@ import SwiftUI
 
 struct Account : Codable{
     
-    let userid : String
+    let owners : [String]
+    let _id : String
     let username : String
     let firstname : String
     let lastname : String
     let birthdate : String
     let email : String
     let telephone : String
-    let owners : [String]
+    let role : String
+    let __v: Int
 }

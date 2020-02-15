@@ -15,6 +15,7 @@ enum ProfileSignInStatus {
 
 class ProfileStore : ObservableObject {
     
+    var account:Account?
     @Published var showAlert = false
     @Published var showWelcome = false
 
@@ -67,9 +68,30 @@ class ProfileStore : ObservableObject {
             if (profileSignInStatus == .Loading){
                 print("someone set loading")
                 verifyToken()
+            } else if(profileSignInStatus == .SignedIn){
+                getUserInfo()
             }
         }
     }
+    
+    func getUserInfo(){
+        
+        if let token = keychain.get("accessToken") , let user = keychain.get("username"){
+            WebServices.getUser(name: user, token: token, callback: ResponseCallback(onSuccess: { account in
+                print(account[0])
+                self.account = account[0]
+            }, onFailure: { (statusCode) in
+                self.errMsg = "Cant Get User Information \(statusCode)"
+            }, onError: { (errMsg) in
+                self.errMsg = "Can Get User Information \(errMsg)"
+            }))
+        }else{
+            self.errMsg = "Please Login Again"
+            self.profileSignInStatus = .NotSignedIn
+        }
+        
+    }
+    
     
     func signUpBtnClicked(){
         let bd = dateFormatter.string(from: birthdate)
