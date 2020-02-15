@@ -74,6 +74,8 @@ class WebServices {
                     do {
                         let decoder = JSONDecoder()
                         let jsonData = try decoder.decode(type, from: data)
+                        
+                        print("JOSN DECODER RESULT")
                         print(jsonData)
                         
                         DispatchQueue.main.async {

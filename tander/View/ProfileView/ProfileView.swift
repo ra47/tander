@@ -29,7 +29,7 @@ struct ProfileView: View {
                     Section(header: Text("Basic Info")){
                         Text("First Name: \(store.account!.firstname)")
                         Text("Last Name: \(store.account!.lastname)")
-                        Text("Birth Date: \(store.account!.birthdate)")
+                        Text("Birth Date: \(store.account!.birthdate.components(separatedBy:"T" )[0])")
                         Text("Email: \(store.account!.email)")
                         Text("Telephone: \(store.account!.telephone)")
                     }

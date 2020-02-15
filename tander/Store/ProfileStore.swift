@@ -41,9 +41,8 @@ class ProfileStore : ObservableObject {
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.locale = Locale(identifier: "en_US")
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         return formatter
     }
     
@@ -78,7 +77,6 @@ class ProfileStore : ObservableObject {
         
         if let token = keychain.get("accessToken") , let user = keychain.get("username"){
             WebServices.getUser(name: user, token: token, callback: ResponseCallback(onSuccess: { account in
-                print(account)
                 self.account = account
             }, onFailure: { (statusCode) in
                 self.errMsg = "Cant Get User Information \(statusCode)"
@@ -102,7 +100,7 @@ class ProfileStore : ObservableObject {
             "password": pass,
             "firstname": fname,
             "lastname": lname,
-            "birthdate": bd,
+            "birthdate": bd + "Z",
             "email": email,
             "telephone": phone,
             "role" : "user",

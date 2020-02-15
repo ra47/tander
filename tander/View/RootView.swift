@@ -37,7 +37,7 @@ struct RootView: View {
             .tag(3)
             
             
-            ProfileView().environmentObject(ProfileStore())
+            ProfileView().environmentObject(store)
                 .tabItem {
                     Image(systemName: "person.crop.circle.fill")
                     Text("Profile")
