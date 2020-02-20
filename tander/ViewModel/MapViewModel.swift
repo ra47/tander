@@ -19,3 +19,11 @@ struct MapViewModel_Previews: PreviewProvider {
         MapViewModel()
     }
 }
+
+//WebServices.findNearbyRestaurant(lat: CLLocationManager().location?.coordinate.latitude ?? 0, lon: CLLocationManager().location?.coordinate.longitude ?? 0, callback: ResponseCallback(onSuccess: { (Restaurants) in
+//    print(Restaurants.count)
+//}, onFailure: { (statusCode) in
+//    print(statusCode)
+//}, onError: { (errMsg) in
+//    print(errMsg)
+//}))

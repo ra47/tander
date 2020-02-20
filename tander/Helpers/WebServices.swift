@@ -45,6 +45,10 @@ class WebServices {
         fetchJSON(url: baseUrl + "/restaurants/\(name)", type: [Restaurant].self, callback: callback)
     }
     
+    static func findNearbyRestaurant(lat: Double, lon: Double, callback: ResponseCallback<[Restaurant]>){
+        fetchJSON(url: baseUrl + "/restaurants/?lat=\(lat)&lon=\(lon)", type: [Restaurant].self, callback: callback)
+    }
+    
     
     
     

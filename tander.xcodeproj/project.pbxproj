@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,10 +27,12 @@
 		1170E72123D466DB00181873 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E72023D466DB00181873 /* WebServices.swift */; };
 		1170E72323D46D6500181873 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E72223D46D6500181873 /* RootView.swift */; };
 		118EAC3523F6A60D00D2DAC0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118EAC3423F6A60D00D2DAC0 /* Token.swift */; };
+		1197993223FED94300F9F5A5 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		119A81B623FED73100F01523 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11B5D82D23D2F0830003F974 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D82C23D2F0830003F974 /* Map.swift */; };
 		11B5D82F23D2F3690003F974 /* SignInSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */; };
 		11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */; };
-		4F47715C275785AC798C0C7B /* Pods_tander.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E03789EF9D5876B1B2461F8F /* Pods_tander.framework */; };
+		1C1BC8260DE562F2A9924F23 /* libPods-tander.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EFBB67DB782344200451E1 /* libPods-tander.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +52,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		119A81B723FED73100F01523 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1197993223FED94300F9F5A5 /* (null) in Embed Frameworks */,
+				119A81B623FED73100F01523 /* (null) in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		06EFBB67DB782344200451E1 /* libPods-tander.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tander.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1100DDDC23FECEFD00B13E88 /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		110757C423D1CE50003B5EB4 /* tander.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tander.entitlements; sourceTree = "<group>"; };
 		110757C623D1CE92003B5EB4 /* SignInWithAppleBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleBtn.swift; sourceTree = "<group>"; };
 		11182B2623D1C30D00DEBCDA /* tander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tander.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,12 +97,13 @@
 		1170E72023D466DB00181873 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		1170E72223D46D6500181873 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		118EAC3423F6A60D00D2DAC0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		119A81B223FED5CA00F01523 /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		119A81B923FED76100F01523 /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B5D82C23D2F0830003F974 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		11B5D82E23D2F3690003F974 /* SignInSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpView.swift; sourceTree = "<group>"; };
 		11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSignInSignUpView.swift; sourceTree = "<group>"; };
-		1D4EDCCDDCD016455C8B787A /* Pods-tander.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tander.release.xcconfig"; path = "Target Support Files/Pods-tander/Pods-tander.release.xcconfig"; sourceTree = "<group>"; };
-		924E4AD0672E8696968AF57D /* Pods-tander.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tander.debug.xcconfig"; path = "Target Support Files/Pods-tander/Pods-tander.debug.xcconfig"; sourceTree = "<group>"; };
-		E03789EF9D5876B1B2461F8F /* Pods_tander.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tander.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C653CBAF760E9D8FB4420E60 /* Pods-tander.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tander.release.xcconfig"; path = "Target Support Files/Pods-tander/Pods-tander.release.xcconfig"; sourceTree = "<group>"; };
+		C67979FFBB2CEEE4F079B927 /* Pods-tander.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tander.debug.xcconfig"; path = "Target Support Files/Pods-tander/Pods-tander.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F47715C275785AC798C0C7B /* Pods_tander.framework in Frameworks */,
+				1C1BC8260DE562F2A9924F23 /* libPods-tander.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +285,10 @@
 		D6BD8714DA6E5734CBC404F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E03789EF9D5876B1B2461F8F /* Pods_tander.framework */,
+				119A81B923FED76100F01523 /* KeychainSwift.framework */,
+				119A81B223FED5CA00F01523 /* KeychainSwift.framework */,
+				1100DDDC23FECEFD00B13E88 /* KeychainSwift.framework */,
+				06EFBB67DB782344200451E1 /* libPods-tander.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -273,8 +296,8 @@
 		D88C912690CE3E3DCD31F5A5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				924E4AD0672E8696968AF57D /* Pods-tander.debug.xcconfig */,
-				1D4EDCCDDCD016455C8B787A /* Pods-tander.release.xcconfig */,
+				C67979FFBB2CEEE4F079B927 /* Pods-tander.debug.xcconfig */,
+				C653CBAF760E9D8FB4420E60 /* Pods-tander.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -286,11 +309,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11182B5023D1C30F00DEBCDA /* Build configuration list for PBXNativeTarget "tander" */;
 			buildPhases = (
-				E0BF25B32B09004FF086DAEC /* [CP] Check Pods Manifest.lock */,
+				2EB1504AB172789D4E741AF8 /* [CP] Check Pods Manifest.lock */,
 				11182B2223D1C30D00DEBCDA /* Sources */,
 				11182B2323D1C30D00DEBCDA /* Frameworks */,
 				11182B2423D1C30D00DEBCDA /* Resources */,
-				7F4FC71DC749584EAC1DC087 /* [CP] Embed Pods Frameworks */,
+				119A81B723FED73100F01523 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -409,24 +432,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7F4FC71DC749584EAC1DC087 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tander/Pods-tander-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tander/Pods-tander-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tander/Pods-tander-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E0BF25B32B09004FF086DAEC /* [CP] Check Pods Manifest.lock */ = {
+		2EB1504AB172789D4E741AF8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -634,12 +640,13 @@
 		};
 		11182B5123D1C30F00DEBCDA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 924E4AD0672E8696968AF57D /* Pods-tander.debug.xcconfig */;
+			baseConfigurationReference = C67979FFBB2CEEE4F079B927 /* Pods-tander.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tander/tander.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tander/Preview Content\"";
+				DEVELOPMENT_TEAM = T4GT5GFBT8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tander/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -649,18 +656,19 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.romeoalpha.tander;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		11182B5223D1C30F00DEBCDA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D4EDCCDDCD016455C8B787A /* Pods-tander.release.xcconfig */;
+			baseConfigurationReference = C653CBAF760E9D8FB4420E60 /* Pods-tander.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tander/tander.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tander/Preview Content\"";
+				DEVELOPMENT_TEAM = T4GT5GFBT8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tander/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -670,7 +678,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.romeoalpha.tander;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

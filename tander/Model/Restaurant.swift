@@ -10,19 +10,19 @@ import SwiftUI
 
 struct Restaurant: Codable {
     let _id: String
-    let categories: [String]
-    let placeID: String
-    let name: String
-    let url: String
-    let startPrice: Int
-    let address: String
-    let position: cod
-    let isPartner: Bool
-    let __n: Int
+    let categories: [String]?
+    let placeID: String?
+    let name: String?
+    let url: String?
+    let startPrice: Int?
+    let address: String?
+    let position: cod?
+    let isPartner: Bool?
+    let __v: Int
     
     
     struct cod: Codable {
-        let lat: String
-        let lon: String
+        let lat: Double
+        let lon: Double
     }
 }
