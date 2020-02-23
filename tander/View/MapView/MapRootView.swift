@@ -11,6 +11,8 @@ import SwiftUI
 struct MapRootView: View {
     
     @State private var searchText = ""
+    @ObservedObject var mapVM = MapViewModel()
+
     
     var body: some View {
         
@@ -20,14 +22,19 @@ struct MapRootView: View {
                 // Search view
                 SearchBarView(searchText: $searchText)
                 
-                Map()
-                    .navigationBarTitle(Text("Search"))
+                Map(mapVM: mapVM)
+                .onAppear{
+                        self.mapVM.getNearbyRestaurant()
+                }
+                    .navigationBarTitle(Text("Nearby"))
                     .navigationBarItems(trailing: Button(action: {
                         //do some stuff here may be sheet pop up
                     }) {
                         Text("Filter")
                     })
                     .resignKeyboardOnDragGesture()
+            }.alert(isPresented: $mapVM.showAlert){
+                Alert(title:Text(mapVM.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
             }
         }
     }
@@ -116,6 +123,6 @@ struct SearchBarView: View {
 
 struct MapRootView_Previews: PreviewProvider {
     static var previews: some View {
-        Map()
+        Map(mapVM: MapViewModel())
     }
 }

@@ -12,6 +12,7 @@ import MapKit
 struct Map: UIViewRepresentable {
     
     var locationManager = CLLocationManager()
+    var mapVM : MapViewModel
     
      func setupManager() {
        locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -28,11 +29,14 @@ struct Map: UIViewRepresentable {
     }
 
     func updateUIView(_ view: MKMapView, context: Context) {
+        updateAnnotations(from: view)
+    }
+    
+    private func updateAnnotations(from mapView: MKMapView) {
+        mapView.removeAnnotations(mapView.annotations)
+        let newAnnotations = mapVM.restaurants.map { RestaurantAnnotation(restaurant: $0) }
+      mapView.addAnnotations(newAnnotations)
     }
 }
 
-struct Map_Previews: PreviewProvider {
-    static var previews: some View {
-        Map()
-    }
-}
+
