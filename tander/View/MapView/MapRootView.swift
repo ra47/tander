@@ -20,52 +20,21 @@ struct MapRootView: View {
             VStack {
                 
                 // Search view
-                SearchBarView(searchText: $searchText)
+                NavigationLink(destination: SearchView()){
+                    SearchBarView(searchText: $searchText)
+                }
+                //SearchBarView(searchText: $searchText)
                 
                 Map(mapVM: mapVM)
                 .onAppear{
                         self.mapVM.getNearbyRestaurant()
                 }
                     .navigationBarTitle(Text("Nearby"))
-                    .navigationBarItems(trailing: Button(action: {
-                        //do some stuff here may be sheet pop up
-                    }) {
-                        Text("Filter")
-                    })
-                    .resignKeyboardOnDragGesture()
+                
             }.alert(isPresented: $mapVM.showAlert){
                 Alert(title:Text(mapVM.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
             }
         }
-    }
-}
-
-//force to resign keyboard
-extension UIApplication {
-    func endEditing(_ force: Bool) {
-        self.windows
-            .filter{$0.isKeyWindow}
-            .first?
-            .endEditing(force)
-    }
-}
-
-// end editing when drag gesture on view
-struct ResignKeyboardOnDragGesture: ViewModifier {
-    
-    //if drag resign keyboard
-    var gesture = DragGesture().onChanged{_ in
-        UIApplication.shared.endEditing(true)
-    }
-    func body(content: Content) -> some View {
-        content.gesture(gesture)
-    }
-}
-
-//make view can use this function
-extension View {
-    func resignKeyboardOnDragGesture() -> some View {
-        modifier(ResignKeyboardOnDragGesture())
     }
 }
 
@@ -76,7 +45,9 @@ struct SearchBarView: View {
     @State private var showCancelButton: Bool = false
     
     //do stuff when after pressed return
-    var onCommit: () -> Void = {print("onCommit")}
+    var onCommit: () -> Void = {
+        print("test")
+    }
     
     var body: some View {
         HStack {

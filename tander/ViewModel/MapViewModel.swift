@@ -41,4 +41,6 @@ class MapViewModel: ObservableObject {
             self.errMsg = "\(errMsg)"
         }))
     }
+    
+    
 }
