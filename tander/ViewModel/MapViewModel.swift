@@ -8,17 +8,18 @@
 
 import SwiftUI
 import MapKit
-
-
+import CoreLocation
 
 class MapViewModel: ObservableObject {
     
     @Published var showAlert = false
-    @Published var lat : Double = 0
-    @Published var lon : Double = 0
+    @Published var lat : Double
+    @Published var lon : Double
     @Published var restaurants :[Restaurant] = [
         Restaurant(_id: "test", categories: ["thai"], placeID: "test", name: "example Annotation", url: "", startPrice: 199, address: "Kasetsart", position: Restaurant.cod(lat: 13.8476, lon: 100.5696), isPartner: false, __v: 0)
     ]
+    
+    @Published var searchedRestaurants: [Restaurant] = []
     
     var errMsg: String? {
         didSet {
@@ -29,7 +30,8 @@ class MapViewModel: ObservableObject {
     }
     
     init(){
-        
+        lat = Double(CLLocationManager().location?.coordinate.latitude ?? 0)
+        lon = Double(CLLocationManager().location?.coordinate.longitude ?? 0)
     }
     
     func getNearbyRestaurant() {
@@ -42,5 +44,17 @@ class MapViewModel: ObservableObject {
         }))
     }
     
+    func searchRestaurant(name: String){
+        WebServices.searchRestaurant(name: name, lat: lat, lon: lon, callback: ResponseCallback(
+            onSuccess: { (restaurants) in
+                self.searchedRestaurants = []
+                self.searchedRestaurants = restaurants
+                
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
+    }
     
 }

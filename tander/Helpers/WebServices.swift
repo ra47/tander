@@ -18,8 +18,8 @@ struct ResponseCallback<T> {
 
 class WebServices {
     private static var baseUrl = "https://tander-webservice.herokuapp.com"
-
-
+    
+    
     private init(){
         
     }
@@ -41,12 +41,18 @@ class WebServices {
         fetchJSON(url: baseUrl + "/users/\(name)", headers: ["Authorization": token], type: Account.self, callback: callback)
     }
     
-    static func searchRestaurant(name: String, token: String, callback: ResponseCallback<[Restaurant]>){
-        fetchJSON(url: baseUrl + "/restaurants/\(name)", type: [Restaurant].self, callback: callback)
+    static func searchRestaurant(name: String, lat: Double, lon: Double, callback: ResponseCallback<[Restaurant]>){
+        print("searching")
+        print(name)
+        print(lat)
+        print(lon)
+        fetchJSON(url: baseUrl + "/restaurants/search/\(name)?lat=\(lat)&lon=\(lon)", type: [Restaurant].self, callback: callback)
     }
     
     static func findNearbyRestaurant(lat: Double, lon: Double, callback: ResponseCallback<[Restaurant]>){
-        fetchJSON(url: baseUrl + "/restaurants/?lat=\(lat)&lon=\(lon)", type: [Restaurant].self, callback: callback)
+        print(lat)
+        print(lon)
+        fetchJSON(url: baseUrl + "/restaurants/search/?lat=\(lat)&lon=\(lon)", type: [Restaurant].self, callback: callback)
     }
     
     
@@ -124,7 +130,13 @@ class WebServices {
                 
                 if let httpResponse = response as? HTTPURLResponse {
                     if (httpResponse.statusCode == 200) {
+                        if let jsonString = String(data: data!, encoding: .utf8) {
+                            if jsonString == "false" {
+                                callback.onFailure(3)
+                            }
+                        }
                         callback.onSuccess(Void())
+                        
                     } else {
                         callback.onFailure(httpResponse.statusCode)
                     }
@@ -154,7 +166,7 @@ class WebServices {
                 
                 guard let data = data else { return }
                 
-            
+                
                 if let httpResponse = response as? HTTPURLResponse {
                     if (httpResponse.statusCode == 200) {
                         do {
@@ -182,3 +194,4 @@ class WebServices {
         
     }
 }
+ 

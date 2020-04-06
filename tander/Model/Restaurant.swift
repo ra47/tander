@@ -8,7 +8,9 @@
 
 import SwiftUI
 
-struct Restaurant: Codable {
+struct Restaurant: Codable,Hashable {
+    
+    
     let _id: String
     let categories: [String]?
     let placeID: String?
@@ -21,7 +23,7 @@ struct Restaurant: Codable {
     let __v: Int
     
     
-    struct cod: Codable {
+    struct cod: Codable,Hashable {
         let lat: Double
         let lon: Double
     }

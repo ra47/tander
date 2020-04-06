@@ -10,19 +10,79 @@ import SwiftUI
 
 struct SearchView: View {
     
+    @ObservedObject var mapVM = MapViewModel()
     @State private var searchText = ""
-
+    
     
     var body: some View {
         
         
-            VStack {
-                SearchBarView(searchText: $searchText)
-                Spacer()
-                .resignKeyboardOnDragGesture()
-                    .navigationBarTitle(Text("Search"), displayMode: .inline)
+        VStack {
+            SearchBarView(searchText: $searchText)
+                .padding(.vertical)
+            NavigationView {
+                List (mapVM.searchedRestaurants, id: \._id) { restaurant in
+                    NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
+                        RestaurantRowView(restaurant: restaurant)
+                    }
+                }
+                
             }
-        
+            .navigationBarTitle(Text("Search"), displayMode: .inline)
+        }
+    }
+}
+
+struct SearchBarView: View {
+    
+    @ObservedObject var mapVM = MapViewModel()
+    @Binding var searchText: String
+    @State private var showCancelButton: Bool = false
+    
+    //do stuff when after pressed return
+    func onCommit(){
+        self.mapVM.searchRestaurant(name: searchText)
+    }
+    
+    var body: some View {
+        HStack {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                
+                // Search text field
+                ZStack (alignment: .leading) {
+                    if searchText.isEmpty { // Separate text for placeholder to give it the proper color
+                        Text("Search")
+                    }
+                    TextField("", text: $searchText, onEditingChanged: { isEditing in
+                        self.showCancelButton = true
+                    }, onCommit: onCommit).foregroundColor(.primary)
+                        .keyboardType(.default)
+                }
+                // Clear button
+                Button(action: {
+                    self.searchText = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+                }
+            }
+            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                .foregroundColor(.secondary) // For magnifying glass and placeholder test
+                .background(Color(.tertiarySystemFill))
+                .cornerRadius(10.0)
+            
+            if showCancelButton  {
+                // Cancel button
+                Button("Cancel") {
+                    UIApplication.shared.endEditing(true) // this must be placed before the other commands here
+                    self.searchText = ""
+                    self.showCancelButton = false
+                }
+                .foregroundColor(Color(.systemBlue))
+            }
+        }
+        .padding(.horizontal)
+        //.navigationBarHidden(showCancelButton)
     }
 }
 
