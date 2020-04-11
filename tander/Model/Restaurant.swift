@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct Restaurant: Codable,Hashable {
+struct Restaurant: Codable,Hashable,Identifiable {
     
-    
+    let id = UUID()
     let _id: String
     let categories: [String]?
     let placeID: String?

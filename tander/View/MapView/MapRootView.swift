@@ -20,17 +20,17 @@ struct MapRootView: View {
                 
                 // Search view
                 NavigationLink(destination: SearchView()){
-                    SearchBarView(searchText: $searchText).onAppear{
+                    SearchBarView(mapVM: mapVM, searchText: $searchText).onAppear{
                         UIApplication.shared.endEditing(true)
                     }
                 }
                 //SearchBarView(searchText: $searchText)
                 
                 Map(mapVM: mapVM)
-                .onAppear{
+                    .onAppear{
                         self.mapVM.getNearbyRestaurant()
                 }
-                    .navigationBarTitle(Text("Nearby"))
+                .navigationBarTitle(Text("Nearby"))
                 
             }.alert(isPresented: $mapVM.showAlert){
                 Alert(title:Text(mapVM.errMsg!), dismissButton: Alert.Button.default(Text("OK")))

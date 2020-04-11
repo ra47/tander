@@ -9,6 +9,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import Combine
 
 class MapViewModel: ObservableObject {
     
@@ -20,6 +21,8 @@ class MapViewModel: ObservableObject {
     ]
     
     @Published var searchedRestaurants: [Restaurant] = []
+        
+    
     
     var errMsg: String? {
         didSet {
@@ -47,9 +50,8 @@ class MapViewModel: ObservableObject {
     func searchRestaurant(name: String){
         WebServices.searchRestaurant(name: name, lat: lat, lon: lon, callback: ResponseCallback(
             onSuccess: { (restaurants) in
-                self.searchedRestaurants = []
                 self.searchedRestaurants = restaurants
-                
+                print(self.searchedRestaurants[1])
         }, onFailure: { (statusCode) in
             self.errMsg = "\(statusCode)"
         }, onError: { (errMsg) in

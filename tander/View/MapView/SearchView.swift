@@ -18,30 +18,31 @@ struct SearchView: View {
         
         
         VStack {
-            SearchBarView(searchText: $searchText)
-                .padding(.vertical)
-            NavigationView {
-                List (mapVM.searchedRestaurants, id: \._id) { restaurant in
-                    NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
-                        RestaurantRowView(restaurant: restaurant)
+            SearchBarView(mapVM: mapVM, searchText: $searchText)
+                List {
+                    ForEach(mapVM.searchedRestaurants) { restaurant in
+                        NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
+                            RestaurantRowView(restaurant: restaurant)
+                        }
                     }
-                }
-                
-            }
-            .navigationBarTitle(Text("Search"), displayMode: .inline)
+                }                
+                .navigationBarTitle(Text("Search"))
+                .resignKeyboardOnDragGesture()
         }
+        
+        
     }
 }
 
 struct SearchBarView: View {
     
-    @ObservedObject var mapVM = MapViewModel()
+    @ObservedObject var mapVM:MapViewModel
     @Binding var searchText: String
     @State private var showCancelButton: Bool = false
     
     //do stuff when after pressed return
     func onCommit(){
-        self.mapVM.searchRestaurant(name: searchText)
+        mapVM.searchRestaurant(name: searchText)
     }
     
     var body: some View {
