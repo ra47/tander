@@ -13,7 +13,10 @@ struct SearchView: View {
     @ObservedObject var mapVM = MapViewModel()
     @State private var searchText = ""
     @State private var showFilter = false
-    
+
+    @State var sliderValue = 0.0
+    var minimumValue = 0.0
+    var maximumvalue = 1000.0
     
     var body: some View {
         
@@ -38,8 +41,40 @@ struct SearchView: View {
                     }
                 }.sheet(isPresented: $showFilter) {
                     VStack{
-                        Text("test")
+                        Text("Category")
                         
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("\(Int(self.minimumValue))")
+                                Slider(value: self.$sliderValue, in: self.minimumValue...self.maximumvalue, step: 10.0)
+                                Text("\(Int(self.maximumvalue))")
+                            }.padding()
+                            Text("Price \(Int(self.sliderValue)) Baht")
+                        }.padding()
+                        
+                        HStack{
+                            Button(action:{
+                                self.showFilter.toggle()
+                            }){
+                                Text("Cancel")
+                            }
+                            .background(Color.white)
+                            .cornerRadius(100)
+                            .foregroundColor(.white)
+                            .shadow(radius: 5)
+                            
+                            Button(action:{
+                                //mapVM.filter
+                                self.showFilter.toggle()
+                            }){
+                                Text("Filter")
+                            }
+                            .background(Color.white)
+                            .cornerRadius(100)
+                            .foregroundColor(.white)
+                            .shadow(radius: 5)
+                            
+                        }.padding()
                     }
                 }
             )
