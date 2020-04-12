@@ -12,6 +12,7 @@ struct SearchView: View {
     
     @ObservedObject var mapVM = MapViewModel()
     @State private var searchText = ""
+    @State private var showFilter = false
     
     
     var body: some View {
@@ -19,14 +20,29 @@ struct SearchView: View {
         
         VStack {
             SearchBarView(mapVM: mapVM, searchText: $searchText)
-                List {
-                    ForEach(mapVM.searchedRestaurants) { restaurant in
-                        NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
-                            RestaurantRowView(restaurant: restaurant)
-                        }
+            List {
+                ForEach(mapVM.searchedRestaurants) { restaurant in
+                    NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
+                        RestaurantRowView(restaurant: restaurant)
                     }
-                }                
-                .navigationBarTitle(Text("Search"))
+                }
+            }
+            .navigationBarTitle(Text("Search"))
+            .navigationBarItems(trailing:
+                Button(action:{
+                    self.showFilter.toggle()
+                }){
+                    HStack{
+                        Text("filter")
+                        //Image(systemName: expand ? "chevron.up" : "chevron.down")
+                    }
+                }.sheet(isPresented: $showFilter) {
+                    VStack{
+                        Text("test")
+                        
+                    }
+                }
+            )
                 .resignKeyboardOnDragGesture()
         }
         
