@@ -13,7 +13,7 @@ struct SearchView: View {
     @ObservedObject var mapVM = MapViewModel()
     @State private var searchText = ""
     @State private var showFilter = false
-
+    
     @State var sliderValue = 0.0
     var minimumValue = 0.0
     var maximumvalue = 1000.0
@@ -58,10 +58,13 @@ struct SearchView: View {
                             }){
                                 Text("Cancel")
                             }
-                            .background(Color.white)
-                            .cornerRadius(100)
-                            .foregroundColor(.white)
-                            .shadow(radius: 5)
+                            .frame(width: 100, height: 40)
+                            .foregroundColor(Color.black)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.black, lineWidth: 1)
+                            )
+                                .padding()
                             
                             Button(action:{
                                 //mapVM.filter
@@ -69,10 +72,13 @@ struct SearchView: View {
                             }){
                                 Text("Filter")
                             }
-                            .background(Color.white)
-                            .cornerRadius(100)
-                            .foregroundColor(.white)
-                            .shadow(radius: 5)
+                            .frame(width: 100, height: 40)
+                            .foregroundColor(Color.black)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.black, lineWidth: 1)
+                            )
+                                .padding()
                             
                         }.padding()
                     }
