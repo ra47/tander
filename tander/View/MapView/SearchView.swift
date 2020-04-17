@@ -13,6 +13,7 @@ struct SearchView: View {
     @ObservedObject var mapVM = MapViewModel()
     @State private var searchText = ""
     @State private var showFilter = false
+    @State private var isFiltered = false
     
     @State var sliderValue = 0.0
     var minimumValue = 0.0
@@ -33,14 +34,17 @@ struct SearchView: View {
             .navigationBarTitle(Text("Search"))
             .navigationBarItems(trailing:
                 Button(action:{
-                    self.showFilter.toggle()
-                }){
-                    HStack{
-                        Text("filter")
-                        //Image(systemName: expand ? "chevron.up" : "chevron.down")
+                    if self.isFiltered {
+                        self.mapVM.searchRestaurant(name: self.searchText)
+                        self.isFiltered = false
+                    }else{
+                        self.showFilter.toggle()
                     }
+                }){                    
+                    Text(isFiltered ? "Clear" : "Filter")
                 }.sheet(isPresented: $showFilter) {
                     VStack{
+                        // 
                         Text("Category")
                         
                         VStack(alignment: .leading) {
@@ -54,7 +58,7 @@ struct SearchView: View {
                         
                         HStack{
                             Button(action:{
-                                self.showFilter.toggle()
+                                self.showFilter = false
                             }){
                                 Text("Cancel")
                             }
@@ -67,8 +71,9 @@ struct SearchView: View {
                                 .padding()
                             
                             Button(action:{
-                                //mapVM.filter
-                                self.showFilter.toggle()
+                                //mapVM.filterSearch(name,cat,price)
+                                self.isFiltered = true
+                                self.showFilter = false
                             }){
                                 Text("Filter")
                             }
