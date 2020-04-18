@@ -22,7 +22,7 @@ class MapViewModel: ObservableObject {
     
     @Published var searchedRestaurants: [Restaurant] = []
         
-    
+    var category = ""
     
     var errMsg: String? {
         didSet {
@@ -59,7 +59,11 @@ class MapViewModel: ObservableObject {
     }
     
     func filterRestaurant(name: String, price: String, category: String){
-        WebServices.filterRestaurant(name: name, price: price, category: category, lat: lat, lon: lon, callback: ResponseCallback(onSuccess: { (restaurants) in
+        self.category = category
+        if(self.category == "-"){
+            self.category = ""
+        }
+        WebServices.filterRestaurant(name: name, price: price, category: self.category, lat: lat, lon: lon, callback: ResponseCallback(onSuccess: { (restaurants) in
             self.searchedRestaurants = restaurants
         }, onFailure: { (statusCode) in
             self.errMsg = "\(statusCode)"

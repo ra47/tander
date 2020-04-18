@@ -15,6 +15,9 @@ struct SearchView: View {
     @State private var showFilter = false
     @State private var isFiltered = false
     
+    var categories = ["-", "Fast Food", "Hot Pot", "Japanese", "Restaurant", "Snacks", "Steak House", "Thai"]
+    @State var selectedCategory = 0 
+    
     @State var sliderValue = 0.0
     var minimumValue = 0.0
     var maximumvalue = 1000.0
@@ -46,49 +49,56 @@ struct SearchView: View {
                 }){                    
                     Text(isFiltered ? "Clear" : "Filter")
                 }.sheet(isPresented: $showFilter) {
-                    VStack{
-                        // 
-                        Text("Category")
-                        
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text("\(Int(self.minimumValue))")
-                                Slider(value: self.$sliderValue, in: self.minimumValue...self.maximumvalue, step: 10.0)
-                                Text("\(Int(self.maximumvalue))")
-                            }.padding()
-                            Text("Price \(Int(self.sliderValue)) Baht")
-                        }.padding()
-                        
-                        HStack{
-                            Button(action:{
-                                self.showFilter = false
-                            }){
-                                Text("Cancel")
+                    VStack(alignment: .center){
+                        NavigationView {
+                            Form {
+                                Section {
+                                    Picker(selection: self.$selectedCategory, label: Text("Category")) {
+                                        ForEach(0 ..< self.categories.count, id: \.self) {
+                                            Text(self.categories[$0])
+                                        }
+                                    }
+                                }
+                                VStack {
+                                    HStack {
+                                        Text("\(Int(self.minimumValue))")
+                                        Slider(value: self.$sliderValue, in: self.minimumValue...self.maximumvalue, step: 10.0)
+                                        Text("\(Int(self.maximumvalue))")
+                                    }.padding()
+                                    Text("Price \(Int(self.sliderValue)) Baht")
+                                }
+                                
+                                HStack{
+                                    Button(action:{
+                                        self.showFilter = false
+                                    }){
+                                        Text("Cancel")
+                                    }
+                                    .frame(width: 100, height: 40)
+                                    .foregroundColor(Color.black)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.black, lineWidth: 1)
+                                    ).padding()
+                                    Spacer()
+                                    
+                                    Button(action:{
+                                        self.mapVM.filterRestaurant(name: self.searchText, price: "\(self.sliderValue)", category: self.categories[self.selectedCategory])
+                                        self.isFiltered = true
+                                        self.showFilter = false
+                                    }){
+                                        Text("Filter")
+                                    }
+                                    .frame(width: 100, height: 40)
+                                    .foregroundColor(Color.black)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.black, lineWidth: 1)
+                                    ).padding()
+                                }
                             }
-                            .frame(width: 100, height: 40)
-                            .foregroundColor(Color.black)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.black, lineWidth: 1)
-                            )
-                                .padding()
                             
-                            Button(action:{
-                                self.mapVM.filterRestaurant(name: self.searchText, price: "\(self.sliderValue)", category: "")
-                                self.isFiltered = true
-                                self.showFilter = false
-                            }){
-                                Text("Filter")
-                            }
-                            .frame(width: 100, height: 40)
-                            .foregroundColor(Color.black)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.black, lineWidth: 1)
-                            )
-                                .padding()
-                            
-                        }.padding()
+                        }
                     }
                 }
             )

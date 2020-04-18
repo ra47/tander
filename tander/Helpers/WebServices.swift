@@ -56,6 +56,8 @@ class WebServices {
     }
     
     static func filterRestaurant(name: String ,price: String,category: String ,lat: Double, lon:Double, callback: ResponseCallback<[Restaurant]>){
+        print(category)
+        print(price)
         fetchJSON(url: baseUrl + "/restaurants/search/\(name)?startPrice=\(price)&categorySpec=\(category)&lat=\(lat)&lon=\(lon)", type: [Restaurant].self, callback: callback)
     }
     
@@ -90,7 +92,7 @@ class WebServices {
                         let jsonData = try decoder.decode(type, from: data)
                         
                         print("JOSN DECODER RESULT")
-                        print(jsonData)
+                        //print(jsonData)
                         
                         DispatchQueue.main.async {
                             callback.onSuccess(jsonData)
