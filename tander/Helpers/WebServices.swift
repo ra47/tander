@@ -55,6 +55,10 @@ class WebServices {
         fetchJSON(url: baseUrl + "/restaurants/search/?lat=\(lat)&lon=\(lon)", type: [Restaurant].self, callback: callback)
     }
     
+    static func filterRestaurant(name: String ,price: String,category: String ,lat: Double, lon:Double, callback: ResponseCallback<[Restaurant]>){
+        fetchJSON(url: baseUrl + "/restaurants/search/\(name)?startPrice=\(price)&categorySpec=\(category)&lat=\(lat)&lon=\(lon)", type: [Restaurant].self, callback: callback)
+    }
+    
     
     
     

@@ -51,7 +51,6 @@ class MapViewModel: ObservableObject {
         WebServices.searchRestaurant(name: name, lat: lat, lon: lon, callback: ResponseCallback(
             onSuccess: { (restaurants) in
                 self.searchedRestaurants = restaurants
-                print(self.searchedRestaurants[1])
         }, onFailure: { (statusCode) in
             self.errMsg = "\(statusCode)"
         }, onError: { (errMsg) in
@@ -59,7 +58,13 @@ class MapViewModel: ObservableObject {
         }))
     }
     
-    func filterRestaurant(){
-        
+    func filterRestaurant(name: String, price: String, category: String){
+        WebServices.filterRestaurant(name: name, price: price, category: category, lat: lat, lon: lon, callback: ResponseCallback(onSuccess: { (restaurants) in
+            self.searchedRestaurants = restaurants
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
     }
 }

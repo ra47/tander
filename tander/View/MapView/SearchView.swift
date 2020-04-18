@@ -35,7 +35,10 @@ struct SearchView: View {
             .navigationBarItems(trailing:
                 Button(action:{
                     if self.isFiltered {
-                        self.mapVM.searchRestaurant(name: self.searchText)
+                        self.mapVM.searchedRestaurants = []
+                        if(self.searchText != ""){
+                            self.mapVM.searchRestaurant(name: self.searchText)
+                        }
                         self.isFiltered = false
                     }else{
                         self.showFilter.toggle()
@@ -71,7 +74,7 @@ struct SearchView: View {
                                 .padding()
                             
                             Button(action:{
-                                //mapVM.filterSearch(name,cat,price)
+                                self.mapVM.filterRestaurant(name: self.searchText, price: "\(self.sliderValue)", category: "")
                                 self.isFiltered = true
                                 self.showFilter = false
                             }){

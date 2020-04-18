@@ -16,7 +16,6 @@ struct RestaurantRowView: View {
             Spacer()
         }
         .padding()
-        .background(Color.orange)
     }
 }
 
