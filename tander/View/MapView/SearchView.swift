@@ -67,37 +67,37 @@ struct SearchView: View {
                                     }.padding()
                                     Text("Price \(Int(self.sliderValue)) Baht")
                                 }
-                                
-                                HStack{
-                                    Button(action:{
-                                        self.showFilter = false
-                                    }){
-                                        Text("Cancel")
-                                    }
-                                    .frame(width: 100, height: 40)
-                                    .foregroundColor(Color.black)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.black, lineWidth: 1)
-                                    ).padding()
-                                    Spacer()
-                                    
-                                    Button(action:{
-                                        self.mapVM.filterRestaurant(name: self.searchText, price: "\(self.sliderValue)", category: self.categories[self.selectedCategory])
-                                        self.isFiltered = true
-                                        self.showFilter = false
-                                    }){
-                                        Text("Filter")
-                                    }
-                                    .frame(width: 100, height: 40)
-                                    .foregroundColor(Color.black)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.black, lineWidth: 1)
-                                    ).padding()
-                                }
                             }
                             
+                        }
+                        HStack{
+                            Button(action:{
+                                self.showFilter = false
+                            }){
+                                Text("Cancel")
+                            }
+                            .frame(width: 100, height: 40)
+                            .foregroundColor(Color.black)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.black, lineWidth: 1)
+                            ).padding()
+                            
+                            Spacer()
+                            
+                            Button(action:{
+                                self.mapVM.filterRestaurant(name: self.searchText, price: "\(self.sliderValue)", category: self.categories[self.selectedCategory])
+                                self.isFiltered = true
+                                self.showFilter = false
+                            }){
+                                Text("Filter")
+                            }
+                            .frame(width: 100, height: 40)
+                            .foregroundColor(Color.black)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.black, lineWidth: 1)
+                            ).padding()
                         }
                     }
                 }
