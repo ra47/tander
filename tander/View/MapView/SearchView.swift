@@ -152,6 +152,7 @@ struct SearchBarView: View {
                 Button("Cancel") {
                     UIApplication.shared.endEditing(true) // this must be placed before the other commands here
                     self.searchText = ""
+                    self.mapVM.searchedRestaurants = []
                     self.showCancelButton = false
                 }
                 .foregroundColor(Color(.systemBlue))
