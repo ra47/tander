@@ -13,7 +13,11 @@ struct RestaurantRowView: View {
     var body: some View {
         HStack{
             Text(restaurant.name!)
-            Spacer()
+                .padding(.trailing)
+            Text("- " + restaurant.address!)
+                .lineLimit(1)
+                .font(.subheadline)
+                .foregroundColor(Color.gray)
         }
         .padding()
     }

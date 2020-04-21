@@ -17,7 +17,7 @@ struct ResponseCallback<T> {
 //Header Authorization value Bearer "token"
 
 class WebServices {
-    private static var baseUrl = "https://tander-webservice.herokuapp.com"
+    private static var baseUrl = "https://tander-webservice.an.r.appspot.com"
     
     
     private init(){
