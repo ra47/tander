@@ -25,7 +25,6 @@ class ImageLoader: ObservableObject {
             guard let data = data else { return }
             DispatchQueue.main.async {
                 self.data = data
-                print(self.data)
             }
         }
         task.resume()
