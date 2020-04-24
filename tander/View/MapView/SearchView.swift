@@ -15,7 +15,7 @@ struct SearchView: View {
     @State private var showFilter = false
     @State private var isFiltered = false
     
-    var categories = ["-", "Fast Food", "Hot Pot", "Japanese", "Restaurant", "Snacks", "Steak House", "Thai"]
+//    var categories = ["-", "Fast Food", "Hot Pot", "Japanese", "Restaurant", "Snacks", "Steak House", "Thai"]
     @State var selectedCategory = 0 
     
     @State var sliderValue = 0.0
@@ -54,8 +54,8 @@ struct SearchView: View {
                             Form {
                                 Section {
                                     Picker(selection: self.$selectedCategory, label: Text("Category")) {
-                                        ForEach(0 ..< self.categories.count, id: \.self) {
-                                            Text(self.categories[$0])
+                                        ForEach(0 ..< self.mapVM.categories.count, id: \.self) {
+                                            Text(self.mapVM.categories[$0])
                                         }
                                     }
                                 }
@@ -86,7 +86,7 @@ struct SearchView: View {
                             Spacer()
                             
                             Button(action:{
-                                self.mapVM.filterRestaurant(name: self.searchText, price: "\(self.sliderValue)", category: self.categories[self.selectedCategory])
+                                self.mapVM.filterRestaurant(name: self.searchText, price: "\(self.sliderValue)", category: self.mapVM.categories[self.selectedCategory])
                                 self.isFiltered = true
                                 self.showFilter = false
                             }){

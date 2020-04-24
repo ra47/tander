@@ -24,7 +24,8 @@ class MapViewModel: ObservableObject {
     @Published var restaurants :[Restaurant] = []
     
     @Published var searchedRestaurants: [Restaurant] = []
-        
+    
+    var categories : [String] = ["-"]
     var category = ""
     
     var errMsg: String? {
@@ -38,6 +39,14 @@ class MapViewModel: ObservableObject {
     init(){
         lat = Double(CLLocationManager().location?.coordinate.latitude ?? 0)
         lon = Double(CLLocationManager().location?.coordinate.longitude ?? 0)
+        
+        WebServices.getCategories(callback: ResponseCallback<[String]>(onSuccess: { (categories) in
+            self.categories += categories
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
     }
     
     func getNearbyRestaurant() {
