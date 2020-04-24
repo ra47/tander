@@ -17,7 +17,13 @@ struct ProfileView: View {
         
         NavigationView{
             VStack{
-                ImageView(withURL: "https://tander-webservice.an.r.appspot.com/images/profiles/\(store.keychain.get("username")!)",token: store.keychain.get("accessToken")!)
+                ImageView(withURL: "/profiles/\(store.keychain.get("username")!)",token: store.keychain.get("accessToken")!)
+                .frame(width: 200, height: 200)
+                .clipShape(Circle())
+                .overlay(
+                    Circle().stroke(Color.white, lineWidth: 4))
+                .shadow(radius: 10)
+                .padding()
                 Form{
                     Section(header: Text("Basic Info")){
                         Text("First Name: \(store.account!.firstname)")
@@ -37,25 +43,18 @@ struct ProfileView: View {
 }
 
 struct ImageView: View {
-    @EnvironmentObject var store: ProfileStore
     @ObservedObject var imageLoader:ImageLoader
     @State var image:UIImage = UIImage()
     
-    init(withURL url:String,token: String) {
-        imageLoader = ImageLoader(urlString: url, headers: ["Authorization": token])
+    init(withURL url:String,token: String? = nil) {
+        imageLoader = ImageLoader(urlString: "https://tander-webservice.an.r.appspot.com/images" + url, headers: token != nil ? ["Authorization": token!] : nil)
     }
     
     var body: some View {
         VStack {
-            Image(uiImage: imageLoader.data != nil ? UIImage(data:imageLoader.data!)! : UIImage(named: "profile")!)
+            Image(uiImage: imageLoader.data != nil ? UIImage(data:imageLoader.data!)! : UIImage(named: "defaultImg")!)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 200, height: 200)
-                .clipShape(Circle())
-                .overlay(
-                    Circle().stroke(Color.white, lineWidth: 4))
-                .shadow(radius: 10)
-                .padding()
         }
     }
 }

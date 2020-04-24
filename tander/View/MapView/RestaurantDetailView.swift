@@ -14,10 +14,9 @@ struct RestaurantDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image("defaultImg")
-                .resizable()
-                .scaledToFit()
-                .padding(.bottom)
+            //will change to restaurant id
+            ImageView(withURL: "/restaurants/5ea2aa6d24522c3e6427248b")
+                .frame(maxWidth: 400, maxHeight: 400)
             HStack{
                 VStack(alignment: .leading){
                     Text(restaurant.name!)
