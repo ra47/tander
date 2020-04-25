@@ -14,39 +14,54 @@ struct createLobbyView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Text("Lobby Name")
-                    .padding(.horizontal)
-                
-                HStack {
-                    TextField("Lobby Name", text: $lobbyVM.lobbyName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("Lobby Name")
+                        .padding(.horizontal)
+                        .padding(.top)
                     
-                    Text("\(lobbyVM.lobbyName.count)/\(lobbyVM.characterLimit)")
-                }.padding(.horizontal)
-                
-                Text("Lobby Description")
-                    .padding(.horizontal)
-                MultilineTextView(text: $lobbyVM.lobbyDesc).textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(maxHeight: 200)
-                    .padding(.horizontal)
-                
-                HStack {
-                    Stepper("How many participant? \(lobbyVM.selectedParticipants)", value: $lobbyVM.selectedParticipants, in: lobbyVM.minParticipants...lobbyVM.maxParticipants)
-                }.padding()
-                
+                    HStack {
+                        TextField("Lobby Name", text: $lobbyVM.lobbyName)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Text("\(lobbyVM.lobbyName.count)/\(lobbyVM.characterLimit)")
+                    }.padding(.horizontal)
+                    
+                    Text("Lobby Description")
+                        .padding(.horizontal)
+                    MultilineTextView(text: $lobbyVM.lobbyDesc).textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(maxHeight: 150)
+                        .padding(.horizontal)
+                    
+                    HStack {
+                        Stepper("How many participant?:     \(lobbyVM.selectedParticipants)", value: $lobbyVM.selectedParticipants, in: lobbyVM.minParticipants...lobbyVM.maxParticipants)
+                    }.padding()
+                }
+                .padding(.horizontal)
+                VStack(alignment: .center){
+                    DatePicker("Time Selection", selection: $lobbyVM.startTime, in: ...Date().addingTimeInterval(86400), displayedComponents: [ .hourAndMinute])
+                    .labelsHidden()
+                    Text("Start at: \(lobbyVM.formatTime())")
+                    
+                    Button(action:{
+                        //implement something
+                    }){
+                        Text("Create")
+                    }
+                    .buttonStyle(WhiteColorBtn())
+                    .padding(.top, 30)
+                }
                 Spacer()
-                
             }
-        .padding()
+            .background(Color(red: 240/255, green: 135/255, blue: 120/255))
             .navigationBarTitle("Create Lobby", displayMode: .inline)
-        }.background(Color.gray)
+        }
     }
 }
 
 struct MultilineTextView: UIViewRepresentable {
     @Binding var text: String
-
+    
     func makeUIView(context: Context) -> UITextView {
         let view = UITextView()
         view.layer.borderColor = UIColor.placeholderText.cgColor
@@ -58,7 +73,7 @@ struct MultilineTextView: UIViewRepresentable {
         
         return view
     }
-
+    
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
     }

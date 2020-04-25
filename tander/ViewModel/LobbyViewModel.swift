@@ -8,6 +8,10 @@
 
 import SwiftUI
 
+enum ParticipantStatus {
+    case NotParticipate, participant, host
+}
+
 class LobbyViewModel: ObservableObject {
     
     let characterLimit = 20
@@ -27,6 +31,18 @@ class LobbyViewModel: ObservableObject {
     let maxParticipants = 10
     @Published var selectedParticipants = 2
     
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }
+    @Published var startTime = Date()
+    
+    func formatTime() -> String {
+        return dateFormatter.string(from: startTime)
+    }
     
     
 }
