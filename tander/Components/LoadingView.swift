@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoadingView<Content>: View where Content: View {
 
-     @EnvironmentObject var store: ProfileStore
+    var isShowing : Bool 
     var content: () -> Content
 
     var body: some View {
@@ -18,8 +18,8 @@ struct LoadingView<Content>: View where Content: View {
             ZStack(alignment: .center) {
 
                 self.content()
-                    .disabled(self.store.isShowing)
-                    .blur(radius: self.store.isShowing ? 3 : 0)
+                    .disabled(self.isShowing)
+                    .blur(radius: self.isShowing ? 3 : 0)
 
                 VStack {
                     Text("Loading...")
@@ -30,7 +30,7 @@ struct LoadingView<Content>: View where Content: View {
                 .background(Color.secondary.colorInvert())
                 .foregroundColor(Color.primary)
                 .cornerRadius(20)
-                    .opacity(self.store.isShowing ? 1 : 0)
+                    .opacity(self.isShowing ? 1 : 0)
 
             }
         }

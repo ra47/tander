@@ -23,7 +23,7 @@ struct SignInSignUpView: View {
     @State var value: CGFloat = 0
     
     var body: some View {
-        LoadingView {
+        LoadingView(isShowing: store.isShowing) {
             ScrollView {
                 VStack{
                     

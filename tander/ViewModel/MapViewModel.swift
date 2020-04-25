@@ -14,6 +14,7 @@ import Combine
 class MapViewModel: ObservableObject {
     
     @Published var showAlert = false
+    @Published var isShowing = false
     @Published var lat : Double
     @Published var lon : Double {
         didSet {
@@ -60,27 +61,38 @@ class MapViewModel: ObservableObject {
     }
     
     func searchRestaurant(name: String){
+        self.isShowing.toggle()
         WebServices.searchRestaurant(name: name, lat: lat, lon: lon, callback: ResponseCallback(
             onSuccess: { (restaurants) in
                 self.searchedRestaurants = restaurants
+                self.isShowing.toggle()
         }, onFailure: { (statusCode) in
             self.errMsg = "\(statusCode)"
+            self.isShowing.toggle()
         }, onError: { (errMsg) in
             self.errMsg = "\(errMsg)"
+            self.isShowing.toggle()
         }))
     }
     
     func filterRestaurant(name: String, price: String, category: String){
+        self.isShowing.toggle()
         self.category = category
         if(self.category == "-"){
             self.category = ""
         }
+        if self.category.contains(" "){
+            self.category = self.category.replacingOccurrences(of: " ", with: "%20")
+        }
         WebServices.filterRestaurant(name: name, price: price, category: self.category, lat: lat, lon: lon, callback: ResponseCallback(onSuccess: { (restaurants) in
             self.searchedRestaurants = restaurants
+            self.isShowing.toggle()
         }, onFailure: { (statusCode) in
             self.errMsg = "\(statusCode)"
+            self.isShowing.toggle()
         }, onError: { (errMsg) in
             self.errMsg = "\(errMsg)"
+            self.isShowing.toggle()
         }))
     }
 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct MapRootView: View {
     
     @State private var searchText = ""
+    @State private var isFiltered = false
     @ObservedObject var mapVM = MapViewModel()
 
     
@@ -20,7 +21,7 @@ struct MapRootView: View {
                 
                 // Search view
                 NavigationLink(destination: SearchView()){
-                    SearchBarView(mapVM: mapVM, searchText: $searchText).onAppear{
+                    SearchBarView(mapVM: mapVM, searchText: $searchText,isFiltered: $isFiltered).onAppear{
                         UIApplication.shared.endEditing(true)
                     }
                 }
