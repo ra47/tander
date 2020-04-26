@@ -181,4 +181,9 @@ class ProfileStore : ObservableObject {
         
         
     }
+    
+    func signOut(){
+        keychain.clear()
+        profileSignInStatus = ProfileSignInStatus.NotSignedIn
+    }
 }

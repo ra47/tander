@@ -32,12 +32,14 @@ struct ProfileView: View {
                         Text("Email: \(store.account!.email)")
                         Text("Telephone: \(store.account!.telephone)")
                     }
-                
-
                 }
-            }.navigationBarTitle(Text("Profile"), displayMode: .inline)
-            
-            
+                Button(action:{
+                    self.store.signOut()
+                }){
+                    Text("Sign Out")
+                }
+            }
+            .navigationBarTitle(Text("Profile"), displayMode: .inline)
         }
     }
 }
