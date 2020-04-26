@@ -12,8 +12,14 @@ enum ParticipantStatus {
     case NotParticipate, participant, host
 }
 
+enum PageStatus {
+    case list, detail, eating, finished
+}
+
 class LobbyViewModel: ObservableObject {
     
+    @Published var pageStatus : PageStatus
+    @Published var selectedLobby : Lobby = Lobby(id: "0", lobbyName: "test room")
     let characterLimit = 20
     
     @Published var lobbyName : String = "" {
@@ -44,5 +50,8 @@ class LobbyViewModel: ObservableObject {
         return dateFormatter.string(from: startTime)
     }
     
+    init(){
+        pageStatus = PageStatus.list
+    }
     
 }
