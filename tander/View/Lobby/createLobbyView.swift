@@ -46,7 +46,7 @@ struct createLobbyView: View {
                     Button(action:{
                         //implement something
                     }){
-                        Text("Create")
+                        Text("Submit")
                     }
                     .buttonStyle(WhiteColorBtn())
                     .padding(.top, 30)

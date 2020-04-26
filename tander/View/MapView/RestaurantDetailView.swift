@@ -44,7 +44,7 @@ struct RestaurantDetailView: View {
                 Button(action:{}){
                     Text("Join")
                 }
-                
+                    
                 .padding(.all , 5)
                 .background(Color.gray)
                 .foregroundColor(Color.white)
@@ -54,7 +54,7 @@ struct RestaurantDetailView: View {
             Spacer()
             
         }
-         .navigationBarTitle(Text(restaurant.name!), displayMode: .inline)
+        .navigationBarTitle(Text(restaurant.name!), displayMode: .inline)
     }
 }
 
