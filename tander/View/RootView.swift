@@ -29,7 +29,7 @@ struct RootView: View {
             }
             .tag(2)
             
-            Text("The content of the third view")
+            LobbyRootView().environmentObject(store)
                 .tabItem {
                     Image(systemName: "person.3.fill")
                     Text("Nearby")

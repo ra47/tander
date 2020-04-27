@@ -36,7 +36,7 @@ class PromotionViewModel: ObservableObject {
     
     func getRestaurant(token : String,body : [String]){
         let body = [
-             "restaurantIds": ["5ea6030eb6e8142730d6f0e0"]
+             "restaurantIds": body
         ]
         WebServices.getRestaurantNames(token: token, body: body, callback: ResponseCallback(onSuccess: { (restaurants) in
             self.restaurantArray = []

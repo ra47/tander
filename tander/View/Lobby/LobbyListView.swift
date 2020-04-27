@@ -24,6 +24,7 @@ struct LobbyListView: View {
                         
                         .animation(.linear(duration: 0.3))
                     Button(action:{
+                        self.lobbyVM.selectedLobby = lobby
                         self.lobbyVM.pageStatus = PageStatus.detail
                     }){
                         Text("Join")
