@@ -16,7 +16,76 @@ struct LobbyDetailView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text(lobby.lobbyName)
+                
+                //Restaurant Name
+                HStack{
+                    Spacer()
+                    Text(lobby.placeId)
+                        .font(Font.custom("HelveticaNeue-Bold", size: 24))
+                }
+                .padding()
+                
+                //Description Section
+                VStack{
+                    Divider()
+                    HStack {
+                        Text("Description")
+                            .fontWeight(Font.Weight.medium)
+                        Spacer()
+                    }
+                    HStack {
+                        Text(lobby.description)
+                        Spacer()
+                    }
+                    Divider()
+                }
+                .padding()
+                
+                //Participants Card
+                VStack{
+                    HStack{
+                        Text("Participants")
+                            .fontWeight(Font.Weight.heavy)
+                    }
+                    Divider()
+                    ForEach(lobby.participant, id: \.self){ participant in
+                        Text(participant)
+                    }
+                    
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.black.opacity(0.2), radius: 7, x: 0, y: 2)
+                .padding()
+                
+                
+                //Button Section
+                VStack{
+                    HStack{
+                        Spacer()
+                        Text("Start at:\(dateFormat(date: lobby.startTime)) ")
+                        Spacer()
+                        //may be to chat room here
+                    }
+                    .padding()
+                    .background(Color.orange)
+                    .cornerRadius(15)
+                    .shadow(color: Color.black.opacity(0.2), radius: 7, x: 0, y: 2)
+                    .padding()
+                }
+                
+                if lobbyVM.participantStatus == ParticipantStatus.host{
+                    //start leave
+                    //if start send status from waiting to eating
+                    //set pageStatus all to Eating,Finish
+                    EmptyView()
+                }else{
+                    //leave set pageStatus to list and participantstatus to notParticipated
+                    EmptyView()
+                }
+                
+                Spacer()
             }
             .navigationBarTitle(Text(lobby.lobbyName),displayMode: .inline)
             .navigationBarItems(leading: Button(action:{
@@ -25,6 +94,12 @@ struct LobbyDetailView: View {
                 Text("Back")
             })
         }
+    }
+    
+    func dateFormat(date: String) -> String{
+        var date = date.components(separatedBy:"T")[1]
+        date = date.components(separatedBy: ".")[0]
+        return date
     }
 }
 

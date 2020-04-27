@@ -10,8 +10,7 @@ import SwiftUI
 
 struct LobbyRootView: View {
     
-    let lobbies = [Lobby(id: "0", lobbyName: "Lobby 1"),Lobby(id: "1", lobbyName: "Lobby 2")]
-    
+    @EnvironmentObject var store: ProfileStore
     @ObservedObject var lobbyVM = LobbyViewModel()
     
     var body: some View {
@@ -22,7 +21,7 @@ struct LobbyRootView: View {
         switch  self.lobbyVM.pageStatus {
         case .list:
             print("List is called")
-            return AnyView(LobbyListView(lobbyVM: lobbyVM, lobbies: lobbies))
+            return AnyView(LobbyListView(lobbyVM: lobbyVM).environmentObject(store))
         case .detail:
             print("Detail is called")
             return AnyView(LobbyDetailView(lobbyVM: lobbyVM, lobby: lobbyVM.selectedLobby))

@@ -9,15 +9,15 @@
 import Foundation
 
 struct Lobby : Identifiable,Codable,Hashable {
-    let id : String
+    let id = UUID()
+    let _id : String
     let lobbyName: String
-//    let placeId : String
-//    let startTime : String
-//    let description : String
-//    let hostUsername : String
-//    let maxParticipant : Int
-//    let lobbyStatus : String
-//    let chats : [String]
-//    let participant : [String]
-//    let __v : Int
+    let placeId : String
+    let startTime : String
+    let description : String
+    let hostUsername : String
+    let maxParticipant : Int
+    let lobbyStatus : String
+    let chats : [String]
+    let participant : [String]
 }

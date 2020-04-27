@@ -41,7 +41,6 @@ class PromotionViewModel: ObservableObject {
         WebServices.getRestaurantNames(token: token, body: body, callback: ResponseCallback(onSuccess: { (restaurants) in
             self.restaurantArray = []
             for restaurant in restaurants{
-                print(restaurant.name!)
                 self.restaurantArray.append(restaurant.name!)
             }
         }, onFailure: { (statusCode) in

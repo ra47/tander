@@ -10,28 +10,37 @@ import SwiftUI
 
 struct LobbyListView: View {
     
+    @EnvironmentObject var store:ProfileStore
     @ObservedObject var lobbyVM : LobbyViewModel
-    let lobbies : [Lobby]
     @State private var selection: Set<Lobby> = []
     
     var body: some View {
         
         NavigationView {
-            List(self.lobbies) { lobby in
-                HStack {
-                    LobbyRowView(lobby: lobby, isExpanded: self.selection.contains(lobby))
-                        .onTapGesture { self.selectDeselect(lobby: lobby) }
-                        
+            List(self.lobbyVM.lobbies) { lobby in
+                if lobby.lobbyStatus == "waiting" {
+                    HStack {
+                        LobbyRowView(lobby: lobby, isExpanded: self.selection.contains(lobby))
+                            .onTapGesture { self.selectDeselect(lobby: lobby) }
+                            
+                            .animation(.linear(duration: 0.3))
+                        Button(action:{
+                            self.lobbyVM.selectedLobby = lobby
+                            self.lobbyVM.pageStatus = PageStatus.detail
+                        }){
+                            Text("Join")
+                        }
                         .animation(.linear(duration: 0.3))
-                    Button(action:{
-                        self.lobbyVM.selectedLobby = lobby
-                        self.lobbyVM.pageStatus = PageStatus.detail
-                    }){
-                        Text("Join")
                     }
                 }
             }
             .navigationBarTitle("Lobby",displayMode: .inline)
+        }
+        .alert(isPresented: $lobbyVM.showAlert){
+            Alert(title:Text(lobbyVM.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
+        }
+        .onAppear(){
+            self.lobbyVM.getLobbies(token: self.store.keychain.get("accessToken")!)
         }
     }
     

@@ -73,6 +73,9 @@ class WebServices {
         getResJSON(url: baseUrl + "/restaurants/id/getByIds", body: body,headers: ["Authorization": token], type: [Restaurant].self, callback: callback)
     }
     
+    static func getLobbies(token : String,callback: ResponseCallback<[Lobby]>){
+        fetchJSON(url: baseUrl + "/lobbies/", headers: ["Authorization": token], type: [Lobby].self, callback: callback)
+    }
     
     
     static func fetchJSON<T: Decodable>(url: String, headers: [String: String]? = nil, type: T.Type, callback: ResponseCallback<T>) {
@@ -99,7 +102,7 @@ class WebServices {
                         let jsonData = try decoder.decode(type, from: data)
                         
                         print("JOSN DECODER RESULT")
-                        //print(jsonData)
+                        print(jsonData)
                         
                         DispatchQueue.main.async {
                             callback.onSuccess(jsonData)

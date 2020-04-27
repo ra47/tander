@@ -202,8 +202,8 @@
 		11182B2823D1C30D00DEBCDA /* tander */ = {
 			isa = PBXGroup;
 			children = (
-				110757C523D1CE78003B5EB4 /* Components */,
 				110757C423D1CE50003B5EB4 /* tander.entitlements */,
+				110757C523D1CE78003B5EB4 /* Components */,
 				11182B5C23D1C52D00DEBCDA /* Helpers */,
 				11182B5B23D1C52600DEBCDA /* View */,
 				11182B5A23D1C51F00DEBCDA /* ViewModel */,

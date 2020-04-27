@@ -18,8 +18,21 @@ enum PageStatus {
 
 class LobbyViewModel: ObservableObject {
     
+    @Published var showAlert = false
+    
+    var errMsg: String? {
+        didSet {
+            if errMsg != nil {
+                showAlert = true
+            }
+        }
+    }
+    
+    @Published var participantStatus : ParticipantStatus = ParticipantStatus.NotParticipate
     @Published var pageStatus : PageStatus
-    @Published var selectedLobby : Lobby = Lobby(id: "0", lobbyName: "test room")
+    @Published var lobbies : [Lobby] = []
+    @Published var selectedLobby : Lobby = Lobby(_id: "", lobbyName: "", placeId: "", startTime: "", description: "", hostUsername: "", maxParticipant: 99, lobbyStatus: "", chats: [], participant: [])
+    
     let characterLimit = 20
     
     @Published var lobbyName : String = "" {
@@ -54,4 +67,13 @@ class LobbyViewModel: ObservableObject {
         pageStatus = PageStatus.list
     }
     
+    func getLobbies(token : String){
+        WebServices.getLobbies(token: token, callback: ResponseCallback(onSuccess: { lobbies in
+            self.lobbies = lobbies
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
+    }
 }
