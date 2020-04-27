@@ -25,6 +25,6 @@ struct RestaurantRowView: View {
 
 struct RestaurantRowView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantRowView(restaurant:  Restaurant(_id: "test", categories: ["thai"], placeID: "test", name: "example Annotation", url: "", startPrice: 199, address: "Kasetsart", position: Restaurant.cod(lat: 13.8476, lon: 100.5696), isPartner: false, __v: 0))
+        RestaurantRowView(restaurant:  Restaurant(_id: "test", categories: ["thai"], placeID: "test", name: "example Annotation", url: "", startPrice: 199, address: "Kasetsart", position: Restaurant.cod(lat: 13.8476, lon: 100.5696), isPartner: false))
     }
 }

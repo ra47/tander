@@ -20,7 +20,6 @@ struct Restaurant: Codable,Hashable,Identifiable {
     let address: String?
     let position: cod?
     let isPartner: Bool?
-    let __v: Int
     
     
     struct cod: Codable,Hashable {

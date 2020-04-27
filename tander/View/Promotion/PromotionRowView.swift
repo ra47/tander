@@ -47,6 +47,6 @@ struct PromotionRowView: View {
 
 struct PromotionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        PromotionRowView(promotion:Promotion(_id: "021323", promotionName: "test Promotion", description: "use for Previews", validTime: "04-08-20", endTime: "04-09-20", isVisible: true, ownerUsername: "admin", __v: 0))
+        PromotionRowView(promotion:Promotion(_id: "021323", promotionName: "test Promotion", description: "use for Previews", validTime: "04-08-20", endTime: "04-09-20", isVisible: true, ownerUsername: "admin"))
     }
 }

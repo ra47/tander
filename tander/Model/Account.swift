@@ -19,5 +19,4 @@ struct Account : Codable{
     let email : String
     let telephone : String
     let role : String
-    let __v: Int
 }

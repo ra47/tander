@@ -18,6 +18,5 @@ struct Promotion : Identifiable,Codable,Hashable {
     let endTime : String
     let isVisible : Bool
     let ownerUsername : String
-    let __v : Int
 
 }
