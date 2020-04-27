@@ -10,27 +10,63 @@ import SwiftUI
 
 struct PromotionRowView: View {
     
-    @EnvironmentObject var store : ProfileStore
+    var token : String
+    @ObservedObject var promoVM : PromotionViewModel
+    @ObservedObject var restaurantVM = PromotionViewModel()
     var promotion : Promotion
     
+    var isExpanded : Bool
+    
+    init(promoVM: PromotionViewModel, promotion: Promotion, isExpanded: Bool, token: String){
+        self.promoVM = promoVM
+        self.promotion = promotion
+        self.isExpanded = isExpanded
+        self.token = token
+        restaurantVM.getRestaurant(token: token, body: promotion.restaurantApply)
+    }
     var body: some View {
         
         VStack {
-            ImageView(withURL: "/promotions/\(promotion._id)",token: store.keychain.get("accessToken")!)
+            ImageView(withURL: "/promotions/\(promotion._id)",token: token)
                 .scaledToFill()
                 .frame(minWidth: nil, idealWidth: nil, maxWidth: UIScreen.main.bounds.width, minHeight: nil, idealHeight: nil, maxHeight: 300, alignment: .center)
                 .clipped()
             
-            
+            //Below Image Section
             VStack(alignment: .leading){
                 Text(promotion.promotionName)
                     .fontWeight(Font.Weight.heavy)
                 Text(promotion.description)
                     .font(Font.custom("HelveticaNeue-Bold", size: 16))
                     .foregroundColor(Color.gray)
+                HStack {
+                    Spacer()
+                    if promotion.restaurantApply.count != 0 {
+                        Text("More Detail")
+                            .foregroundColor(Color.gray)
+                        Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                            .foregroundColor(Color.gray)
+                    }
+                }
                 Divider()
             }
             .padding(.horizontal)
+            
+            //Expand Section
+            if isExpanded && promotion.restaurantApply.count != 0 {
+                VStack(alignment: .leading) {
+                    Text("Valid Restaurant")
+                        .fontWeight(Font.Weight.heavy)
+                    
+                    ForEach(restaurantVM.restaurantArray, id: \.self){ restaurant in
+                        Text(restaurant).lineLimit(1)
+                    }
+                }
+                .padding()
+                Divider()
+            }
+            
+            //Bottom Section
             HStack{
                 Text("Valid: \(promotion.validTime.components(separatedBy:"T")[0]) to \(promotion.validTime.components(separatedBy:"T")[0])")
                     .fontWeight(Font.Weight.medium)
@@ -43,10 +79,4 @@ struct PromotionRowView: View {
         .padding()
     }
     
-}
-
-struct PromotionRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        PromotionRowView(promotion:Promotion(_id: "021323", promotionName: "test Promotion", description: "use for Previews", validTime: "04-08-20", endTime: "04-09-20", isVisible: true, ownerUsername: "admin"))
-    }
 }

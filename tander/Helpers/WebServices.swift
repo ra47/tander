@@ -69,9 +69,9 @@ class WebServices {
         fetchJSON(url: baseUrl + "/promotions/",headers: ["Authorization": token], type: [Promotion].self, callback: callback)
     }
     
-    
-    
-    
+    static func getRestaurantNames(token : String, body : [String: Any], callback: ResponseCallback<[Restaurant]>){
+        getResJSON(url: baseUrl + "/restaurants/id/getByIds", body: body,headers: ["Authorization": token], type: [Restaurant].self, callback: callback)
+    }
     
     
     
@@ -205,6 +205,55 @@ class WebServices {
             }
         }.resume()
         
+    }
+    
+    static func getResJSON<T: Decodable>(url: String, body: [String: Any], headers: [String: String]? = nil, type: T.Type, callback: ResponseCallback<T>){
+        
+        guard let url = URL(string: url) else { return }
+        
+        var request = URLRequest(url: url)
+        headers?.forEach { key, value in
+            request.addValue("Bearer \(value)", forHTTPHeaderField: key)
+        }
+        request.httpMethod = "POST"
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    callback.onError("Fetch Error: " + error!.localizedDescription)
+                    return
+                }
+                
+                guard let data = data else { return }
+                
+                if let httpResponse = response as? HTTPURLResponse {
+                    if (httpResponse.statusCode == 200) {
+                        do {
+                            let decoder = JSONDecoder()
+                            let jsonData = try decoder.decode(type, from: data)
+    
+                            DispatchQueue.main.async {
+                                callback.onSuccess(jsonData)
+                            }
+                            
+                        } catch let jsonError {
+                            DispatchQueue.main.async {
+                                callback.onError("JSON Parse Error: " + jsonError.localizedDescription)
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            callback.onFailure(httpResponse.statusCode)
+                        }
+                    }
+                }
+            }
+        }.resume()
     }
 }
  

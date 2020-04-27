@@ -12,7 +12,10 @@ class PromotionViewModel: ObservableObject {
     
     @Published var showAlert = false
     @Published var promotions : [Promotion] = []
+    @Published var restaurant : [String] = []
     
+    @Published var restaurantArray : [String] = []
+
     var errMsg: String? {
         didSet {
             if errMsg != nil {
@@ -29,5 +32,22 @@ class PromotionViewModel: ObservableObject {
         }, onError: { (errMsg) in
             self.errMsg = "\(errMsg)"
         }))
+    }
+    
+    func getRestaurant(token : String,body : [String]){
+        let body = [
+             "restaurantIds": ["5ea6030eb6e8142730d6f0e0"]
+        ]
+        WebServices.getRestaurantNames(token: token, body: body, callback: ResponseCallback(onSuccess: { (restaurants) in
+            self.restaurantArray = []
+            for restaurant in restaurants{
+                print(restaurant.name!)
+                self.restaurantArray.append(restaurant.name!)
+            }
+        }, onFailure: { (statusCode) in
+                self.errMsg = "\(statusCode)"
+            }, onError: { (errMsg) in
+                self.errMsg = "\(errMsg)"
+            }))
     }
 }
