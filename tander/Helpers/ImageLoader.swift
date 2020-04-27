@@ -16,15 +16,19 @@ class ImageLoader: ObservableObject {
     init(urlString:String, headers: [String: String]? = nil) {
         guard let url = URL(string: urlString) else { return }
         
-         var request = URLRequest(url: url)
+        var request = URLRequest(url: url)
         headers?.forEach { key, value in
             request.addValue("Bearer \(value)", forHTTPHeaderField: key)
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else { return }
-            DispatchQueue.main.async {
-                self.data = data
+            if let httpResponse = response as? HTTPURLResponse {
+                if (httpResponse.statusCode == 200) {
+                    DispatchQueue.main.async {
+                        self.data = data
+                    }
+                }
             }
         }
         task.resume()
