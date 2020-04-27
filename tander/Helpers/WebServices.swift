@@ -65,6 +65,9 @@ class WebServices {
         fetchJSON(url: baseUrl + "/restaurants/categoryList", type: [String].self, callback: callback)
     }
     
+    static func getPromotions(token : String ,callback: ResponseCallback<[Promotion]>){
+        fetchJSON(url: baseUrl + "/promotions/",headers: ["Authorization": token], type: [Promotion].self, callback: callback)
+    }
     
     
     

@@ -30,6 +30,10 @@
 		1170E71D23D45D0100181873 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E71C23D45D0100181873 /* ProfileStore.swift */; };
 		1170E72123D466DB00181873 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E72023D466DB00181873 /* WebServices.swift */; };
 		1170E72323D46D6500181873 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170E72223D46D6500181873 /* RootView.swift */; };
+		1174DE432456FEAE004572C8 /* PromotionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1174DE422456FEAE004572C8 /* PromotionListView.swift */; };
+		1174DE452456FEC5004572C8 /* PromotionVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1174DE442456FEC5004572C8 /* PromotionVIewModel.swift */; };
+		1174DE472456FF05004572C8 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1174DE462456FF05004572C8 /* Promotion.swift */; };
+		1174DE492456FF13004572C8 /* PromotionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1174DE482456FF13004572C8 /* PromotionRowView.swift */; };
 		11829DFD24548E0200D81B78 /* LobbyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11829DFC24548E0200D81B78 /* LobbyDetailView.swift */; };
 		11829DFF24548E8D00D81B78 /* LobbyRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11829DFE24548E8D00D81B78 /* LobbyRowView.swift */; };
 		118EAC3523F6A60D00D2DAC0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118EAC3423F6A60D00D2DAC0 /* Token.swift */; };
@@ -113,6 +117,10 @@
 		1170E71C23D45D0100181873 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		1170E72023D466DB00181873 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		1170E72223D46D6500181873 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		1174DE422456FEAE004572C8 /* PromotionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionListView.swift; sourceTree = "<group>"; };
+		1174DE442456FEC5004572C8 /* PromotionVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionVIewModel.swift; sourceTree = "<group>"; };
+		1174DE462456FF05004572C8 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
+		1174DE482456FF13004572C8 /* PromotionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionRowView.swift; sourceTree = "<group>"; };
 		11829DFC24548E0200D81B78 /* LobbyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyDetailView.swift; sourceTree = "<group>"; };
 		11829DFE24548E8D00D81B78 /* LobbyRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyRowView.swift; sourceTree = "<group>"; };
 		118EAC3423F6A60D00D2DAC0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -245,6 +253,7 @@
 				111BB46123F7E72700CE4420 /* Restaurant.swift */,
 				113B8B782402898800E02F5D /* RestaurantAnnotation.swift */,
 				112D710724559DA4004A50DC /* Lobby.swift */,
+				1174DE462456FF05004572C8 /* Promotion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +263,7 @@
 			children = (
 				111BB46323F7E74C00CE4420 /* MapViewModel.swift */,
 				11E38AD92452FFAD00F5CD34 /* LobbyViewModel.swift */,
+				1174DE442456FEC5004572C8 /* PromotionVIewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -267,6 +277,7 @@
 				1170E71F23D466B100181873 /* SignInSignUpView */,
 				114BC38D23F1B9830016DD86 /* MapView */,
 				11E716AC2451A0E10026C639 /* Lobby */,
+				1174DE412456FE8D004572C8 /* Promotion */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -315,6 +326,15 @@
 				11B5D83423D30BA20003F974 /* ButtonSignInSignUpView.swift */,
 			);
 			path = SignInSignUpView;
+			sourceTree = "<group>";
+		};
+		1174DE412456FE8D004572C8 /* Promotion */ = {
+			isa = PBXGroup;
+			children = (
+				1174DE422456FEAE004572C8 /* PromotionListView.swift */,
+				1174DE482456FF13004572C8 /* PromotionRowView.swift */,
+			);
+			path = Promotion;
 			sourceTree = "<group>";
 		};
 		11E716AC2451A0E10026C639 /* Lobby */ = {
@@ -513,7 +533,10 @@
 				114BC39423F2F3570016DD86 /* ProfileView.swift in Sources */,
 				11C82C4A24168D92006BBEC6 /* SearchView.swift in Sources */,
 				113B8B792402898800E02F5D /* RestaurantAnnotation.swift in Sources */,
+				1174DE432456FEAE004572C8 /* PromotionListView.swift in Sources */,
+				1174DE452456FEC5004572C8 /* PromotionVIewModel.swift in Sources */,
 				11E38ADA2452FFAD00F5CD34 /* LobbyViewModel.swift in Sources */,
+				1174DE472456FF05004572C8 /* Promotion.swift in Sources */,
 				114BC38C23F1B9790016DD86 /* MapRootView.swift in Sources */,
 				11B5D83523D30BA20003F974 /* ButtonSignInSignUpView.swift in Sources */,
 				11B5D82F23D2F3690003F974 /* SignInSignUpView.swift in Sources */,
@@ -524,6 +547,7 @@
 				112D710824559DA4004A50DC /* Lobby.swift in Sources */,
 				112D710624558DEF004A50DC /* LobbyListView.swift in Sources */,
 				11182B5E23D1C5AB00DEBCDA /* Account.swift in Sources */,
+				1174DE492456FF13004572C8 /* PromotionRowView.swift in Sources */,
 				11829DFF24548E8D00D81B78 /* LobbyRowView.swift in Sources */,
 				116B1FB523F5CC1D005D51AE /* LoadingView.swift in Sources */,
 				1170E72323D46D6500181873 /* RootView.swift in Sources */,

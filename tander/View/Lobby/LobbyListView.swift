@@ -31,7 +31,6 @@ struct LobbyListView: View {
                 }
             }
             .navigationBarTitle("Lobby",displayMode: .inline)
-            .navigationBarItems(leading:lobbyVM.pageStatus == PageStatus.detail ? Text("Back") : Text(""))
         }
     }
     

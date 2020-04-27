@@ -15,7 +15,7 @@ struct RootView: View {
     var body: some View {
         TabView(selection: $selection) {
             
-            Text("The content of the first view")
+            PromotionListView().environmentObject(store)
                 .tabItem {
                     Image(systemName: "dollarsign.circle.fill")
                     Text("Promotion")
@@ -43,7 +43,7 @@ struct RootView: View {
                     Text("Profile")
             }
             .tag(4)
-                        
+            
         }
     }
 }
