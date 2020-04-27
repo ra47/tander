@@ -27,16 +27,16 @@ struct SignInSignUpView: View {
             ScrollView {
                 VStack{
                     
-                    Image("tander")
+                    Image("logo")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 250.0, height: 250.0)
-                        .padding(.top, 30.0)
+                        .padding(.top, 100)
                     
-                    Text("Tander")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding()
+//                    Text("Tander")
+//                        .font(.largeTitle)
+//                        .fontWeight(.bold)
+//                        .padding()
                     
                     //signin Form
                     if self.isSignIn {
