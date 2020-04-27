@@ -7,5 +7,6 @@ target 'tander' do
 
   # Pods for tander
 pod 'KeychainSwift', '~> 19.0'
+pod 'Socket.IO-Client-Swift', '~> 15.2.0'
 
 end

@@ -32,7 +32,7 @@ struct PromotionRowView: View {
             }
             .padding(.horizontal)
             HStack{
-                Text("Valid: \(promotion.validTime.components(separatedBy:"T")[0]) Until \(promotion.validTime.components(separatedBy:"T")[0])")
+                Text("Valid: \(promotion.validTime.components(separatedBy:"T")[0]) to \(promotion.validTime.components(separatedBy:"T")[0])")
                     .fontWeight(Font.Weight.medium)
             }
             .padding(.bottom)
