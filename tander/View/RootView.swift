@@ -22,7 +22,7 @@ struct RootView: View {
             }
             .tag(1)
             
-            MapRootView()
+            MapRootView().environmentObject(store)
                 .tabItem {
                     Image(systemName: "map.fill")
                     Text("Map")

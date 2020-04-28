@@ -11,6 +11,8 @@ import SwiftUI
 struct SearchView: View {
     
     @ObservedObject var mapVM = MapViewModel()
+    @EnvironmentObject var store:ProfileStore
+
     @State private var searchText = ""
     @State private var showFilter = false
     @State private var isFiltered = false
@@ -30,7 +32,7 @@ struct SearchView: View {
                     .padding(.top)
                 List {
                     ForEach(self.mapVM.searchedRestaurants) { restaurant in
-                        NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
+                        NavigationLink(destination: RestaurantDetailView(restaurant: restaurant).environmentObject(self.store)){
                             RestaurantRowView(restaurant: restaurant)
                         }
                     }

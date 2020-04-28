@@ -13,6 +13,8 @@ struct MapRootView: View {
     @State private var searchText = ""
     @State private var isFiltered = false
     @ObservedObject var mapVM = MapViewModel()
+    @EnvironmentObject var store:ProfileStore
+
 
     
     var body: some View {
@@ -20,7 +22,7 @@ struct MapRootView: View {
             VStack {
                 
                 // Search view
-                NavigationLink(destination: SearchView()){
+                NavigationLink(destination: SearchView().environmentObject(store)){
                     SearchBarView(mapVM: mapVM, searchText: $searchText,isFiltered: $isFiltered).onAppear{
                         UIApplication.shared.endEditing(true)
                     }

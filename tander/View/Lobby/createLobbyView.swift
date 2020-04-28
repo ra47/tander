@@ -10,52 +10,50 @@ import SwiftUI
 
 struct createLobbyView: View {
     
-    @ObservedObject var lobbyVM = LobbyViewModel()
-    
+    @EnvironmentObject var store:ProfileStore
     var body: some View {
-        NavigationView {
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("Lobby Name")
-                        .padding(.horizontal)
-                        .padding(.top)
+        VStack {
+            VStack(alignment: .leading) {
+                Text("Lobby Name")
+                    .padding(.horizontal)
+                    .padding(.top)
+                
+                HStack {
+                    TextField("Lobby Name", text:$store.lobbyVM.lobbyName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    HStack {
-                        TextField("Lobby Name", text: $lobbyVM.lobbyName)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
-                        Text("\(lobbyVM.lobbyName.count)/\(lobbyVM.characterLimit)")
-                    }.padding(.horizontal)
-                    
-                    Text("Lobby Description")
-                        .padding(.horizontal)
-                    MultilineTextView(text: $lobbyVM.lobbyDesc).textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(maxHeight: 150)
-                        .padding(.horizontal)
-                    
-                    HStack {
-                        Stepper("How many participant?:     \(lobbyVM.selectedParticipants)", value: $lobbyVM.selectedParticipants, in: lobbyVM.minParticipants...lobbyVM.maxParticipants)
-                    }.padding()
-                }
-                .padding(.horizontal)
-                VStack(alignment: .center){
-                    DatePicker("Time Selection", selection: $lobbyVM.startTime, in: ...Date().addingTimeInterval(86400), displayedComponents: [ .hourAndMinute])
-                    .labelsHidden()
-                    Text("Start at: \(lobbyVM.formatTime())")
-                    
-                    Button(action:{
-                        //implement something
-                    }){
-                        Text("Submit")
-                    }
-                    .buttonStyle(WhiteColorBtn())
-                    .padding(.top, 30)
-                }
-                Spacer()
+                    Text("\(store.lobbyVM.lobbyName.count)/\(store.lobbyVM.characterLimit)")
+                }.padding(.horizontal)
+                
+                Text("Lobby Description")
+                    .padding(.horizontal)
+                MultilineTextView(text: $store.lobbyVM.lobbyDesc).textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(maxHeight: 150)
+                    .padding(.horizontal)
+                
+                HStack {
+                    Stepper("How many participant?:     \(store.lobbyVM.selectedParticipants)", value: $store.lobbyVM.selectedParticipants, in: store.lobbyVM.minParticipants...store.lobbyVM.maxParticipants)
+                }.padding()
             }
-            .background(Color(red: 240/255, green: 135/255, blue: 120/255))
-            .navigationBarTitle("Create Lobby", displayMode: .inline)
+            .padding(.horizontal)
+            VStack(alignment: .center){
+                DatePicker("Time Selection", selection: $store.lobbyVM.startTime, in: ...Date().addingTimeInterval(86400), displayedComponents: [ .hourAndMinute])
+                    .labelsHidden()
+                Text("Start at: \(store.lobbyVM.formatTime())")
+                
+                Button(action:{
+                    //try to send to server if success save lobby and change status in vm
+                }){
+                    Text("Submit")
+                }
+                .buttonStyle(WhiteColorBtn())
+                .padding(.top, 30)
+            }
+            Spacer()
         }
+        .background(Color(red: 240/255, green: 135/255, blue: 120/255))
+        .navigationBarTitle("Create Lobby", displayMode: .inline)
+        
     }
 }
 

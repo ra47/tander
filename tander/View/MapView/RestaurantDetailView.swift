@@ -11,6 +11,8 @@ import SwiftUI
 struct RestaurantDetailView: View {
     
     var restaurant: Restaurant
+    @EnvironmentObject var store:ProfileStore
+
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -34,11 +36,11 @@ struct RestaurantDetailView: View {
             
             HStack {
                 Spacer()
-                Button(action:{
-                    
-                }){
-                    Text("Create")
+                
+                NavigationLink(destination: createLobbyView().environmentObject(store)) {
+                        Text("Create")
                 }
+                
                 .padding(.all , 5)
                 .background(Color.gray)
                 .foregroundColor(Color.white)
