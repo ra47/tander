@@ -67,7 +67,6 @@ struct LobbyDetailView: View {
                         Spacer()
                         Text("Start at:\(dateFormat(date: lobby.startTime)) ")
                         Spacer()
-                        //may be to chat room here
                     }
                     .padding()
                     .background(Color.orange)
@@ -80,10 +79,14 @@ struct LobbyDetailView: View {
                     Button(action: {
                         self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
                     }){
-                        Text("Leave")
+                        Text("Delete Lobby")
                     }
                 }else{
-                    //post update remove from list
+                    Button(action: {
+                        self.store.lobbyVM.leaveLobby(lobby: self.lobby,token: self.store.keychain.get("accessToken")!, user: self.store.keychain.get("username")!)
+                    }){
+                        Text("Leave Lobby")
+                    }
                 }
                 
                 Spacer()

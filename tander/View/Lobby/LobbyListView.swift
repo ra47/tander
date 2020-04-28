@@ -25,8 +25,7 @@ struct LobbyListView: View {
                             
                             .animation(.linear(duration: 0.3))
                         Button(action:{
-                            self.lobbyVM.selectedLobby = lobby
-                            self.lobbyVM.pageStatus = PageStatus.detail
+                            self.store.lobbyVM.joinLobby(lobby: lobby,token: self.store.keychain.get("accessToken")!, user: self.store.keychain.get("username")!)
                         }){
                             Text("Join")
                         }

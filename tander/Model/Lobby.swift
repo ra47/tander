@@ -18,6 +18,5 @@ struct Lobby : Identifiable,Codable,Hashable {
     let hostUsername : String
     let maxParticipant : Int
     let lobbyStatus : String
-    let chats : [String]
-    let participant : [String]
+    var participant : [String]
 }

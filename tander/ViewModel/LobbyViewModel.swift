@@ -31,7 +31,7 @@ class LobbyViewModel: ObservableObject {
     @Published var participantStatus : ParticipantStatus = ParticipantStatus.NotParticipate
     @Published var pageStatus : PageStatus
     @Published var lobbies : [Lobby] = []
-    @Published var selectedLobby : Lobby = Lobby(_id: "", lobbyName: "", restaurantId: "", startTime: "", description: "", hostUsername: "", maxParticipant: 99, lobbyStatus: "", chats: [], participant: [])
+    @Published var selectedLobby : Lobby = Lobby(_id: "", lobbyName: "", restaurantId: "", startTime: "", description: "", hostUsername: "", maxParticipant: 99, lobbyStatus: "", participant: [])
     @Published var restaurantName : String = ""
     
     let characterLimit = 20
@@ -122,12 +122,75 @@ class LobbyViewModel: ObservableObject {
     func getLobbies(token : String){
         WebServices.getLobbies(token: token, callback: ResponseCallback(onSuccess: { lobbies in
             self.lobbies = lobbies
+            //update select lobby
+            for lobby in self.lobbies {
+                if self.selectedLobby.lobbyName == lobby.lobbyName{
+                    print("updated lobby")
+                    self.selectedLobby = lobby
+                    break
+                }
+            }
         }, onFailure: { (statusCode) in
             self.errMsg = "\(statusCode)"
         }, onError: { (errMsg) in
             self.errMsg = "\(errMsg)"
         }))
     }
+    
+    func joinLobby(lobby: Lobby,token : String,user : String){
+        var newUser = lobby.participant
+        newUser.append(user)
+        let newLobby = [
+            "_id" : lobby._id,
+            "lobbyName" : lobby.lobbyName,
+            "restaurantId" : lobby.restaurantId,
+            "startTime" :  lobby.startTime,
+            "description" : lobby.description,
+            "participant" : newUser,
+            "hostUsername" : lobby.hostUsername,
+            "maxParticipant" : lobby.maxParticipant,
+            "lobbyStatus" : "waiting"
+            ] as [String : Any]
+        print(newLobby)
+        WebServices.postLobby(lobby: newLobby, restaurantId: lobby.restaurantId, token: token, callback: ResponseCallback(onSuccess: { (_) in
+            self.pageStatus = PageStatus.detail
+            self.participantStatus = ParticipantStatus.participant
+            self.selectedLobby = lobby
+            self.selectedLobby.participant = newUser
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
+    }
+    
+    func leaveLobby(lobby: Lobby,token : String,user : String){
+        var newUser = lobby.participant
+        newUser = newUser.filter { $0 != user }
+        let newLobby = [
+            "_id" : lobby._id,
+            "lobbyName" : lobby.lobbyName,
+            "restaurantId" : lobby.restaurantId,
+            "startTime" :  lobby.startTime,
+            "description" : lobby.description,
+            "participant" : newUser,
+            "hostUsername" : lobby.hostUsername,
+            "maxParticipant" : lobby.maxParticipant,
+            "lobbyStatus" : "waiting"
+            ] as [String : Any]
+        print(newLobby)
+        WebServices.postLobby(lobby: newLobby, restaurantId: lobby.restaurantId, token: token, callback: ResponseCallback(onSuccess: { (_) in
+            self.pageStatus = PageStatus.list
+            self.participantStatus = ParticipantStatus.NotParticipate
+            self.selectedLobby.participant = newUser
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
+    }
+    
+    
     
     func deleteLobby(token : String){
         WebServices.deleteLobby(id: selectedLobby._id, token: token, callback: ResponseCallback(onSuccess: { (_) in
