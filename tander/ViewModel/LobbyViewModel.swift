@@ -171,6 +171,31 @@ class LobbyViewModel: ObservableObject {
         }))
     }
     
+    func updateLobby(lobby: Lobby,token : String){
+        let newLobby = [
+            "_id" : lobby._id,
+            "lobbyName" : lobby.lobbyName,
+            "restaurantId" : lobby.restaurantId,
+            "startTime" :  lobby.startTime,
+            "description" : lobby.description,
+            "participant" : lobby.participant,
+            "hostUsername" : lobby.hostUsername,
+            "maxParticipant" : lobby.maxParticipant,
+            "lobbyStatus" : "eating"
+            ] as [String : Any]
+        print(newLobby)
+        WebServices.postLobby(lobby: newLobby, restaurantId: lobby.restaurantId, token: token, callback: ResponseCallback(onSuccess: { (_) in
+            self.pageStatus = PageStatus.detail
+            self.participantStatus = ParticipantStatus.host
+            self.selectedLobby = lobby
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
+    }
+
+    
     func leaveLobby(lobby: Lobby,token : String,user : String){
         var newUser = lobby.participant
         newUser = newUser.filter { $0 != user }

@@ -79,7 +79,7 @@ struct LobbyDetailView: View {
                     if lobbyVM.participantStatus == ParticipantStatus.host{
                         HStack{
                             Button(action: {
-                                //update status and change PageStatus
+                                self.store.lobbyVM.updateLobby(lobby: self.lobby,token: self.store.keychain.get("accessToken")!)
                             }){
                                 Text("Start Eating")
                             }
@@ -100,14 +100,9 @@ struct LobbyDetailView: View {
                     if lobbyVM.participantStatus == ParticipantStatus.host{
                         HStack{
                             Button(action: {
-                                //update status and change PageStatus
-                            }){
-                                Text("Start Eating")
-                            }
-                            Button(action: {
                                 self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
                             }){
-                                Text("Delete Lobby")
+                                Text("Finish Eating")
                             }
                         }
                     }
