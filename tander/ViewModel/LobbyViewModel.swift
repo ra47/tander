@@ -122,13 +122,20 @@ class LobbyViewModel: ObservableObject {
     func getLobbies(token : String){
         WebServices.getLobbies(token: token, callback: ResponseCallback(onSuccess: { lobbies in
             self.lobbies = lobbies
+            var found : Bool = false
             //update select lobby
             for lobby in self.lobbies {
                 if self.selectedLobby.lobbyName == lobby.lobbyName{
                     print("updated lobby")
                     self.selectedLobby = lobby
+                    found = true
                     break
                 }
+            }
+            if !found && self.participantStatus == ParticipantStatus.participant {
+                self.participantStatus = ParticipantStatus.NotParticipate
+                self.pageStatus = PageStatus.list
+                self.errMsg = ("this lobby is gone")
             }
         }, onFailure: { (statusCode) in
             self.errMsg = "\(statusCode)"

@@ -75,17 +75,41 @@ struct LobbyDetailView: View {
                     .padding()
                 }
                 
-                if lobbyVM.participantStatus == ParticipantStatus.host{
-                    Button(action: {
-                        self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
-                    }){
-                        Text("Delete Lobby")
+                if lobby.lobbyStatus == "waiting" {
+                    if lobbyVM.participantStatus == ParticipantStatus.host{
+                        HStack{
+                            Button(action: {
+                                //update status and change PageStatus
+                            }){
+                                Text("Start Eating")
+                            }
+                            Button(action: {
+                                self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
+                            }){
+                                Text("Delete Lobby")
+                            }
+                        }
+                    }else{
+                        Button(action: {
+                            self.store.lobbyVM.leaveLobby(lobby: self.lobby,token: self.store.keychain.get("accessToken")!, user: self.store.keychain.get("username")!)
+                        }){
+                            Text("Leave Lobby")
+                        }
                     }
-                }else{
-                    Button(action: {
-                        self.store.lobbyVM.leaveLobby(lobby: self.lobby,token: self.store.keychain.get("accessToken")!, user: self.store.keychain.get("username")!)
-                    }){
-                        Text("Leave Lobby")
+                } else {
+                    if lobbyVM.participantStatus == ParticipantStatus.host{
+                        HStack{
+                            Button(action: {
+                                //update status and change PageStatus
+                            }){
+                                Text("Start Eating")
+                            }
+                            Button(action: {
+                                self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
+                            }){
+                                Text("Delete Lobby")
+                            }
+                        }
                     }
                 }
                 
