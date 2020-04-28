@@ -11,6 +11,7 @@ import SwiftUI
 struct createLobbyView: View {
     
     @EnvironmentObject var store:ProfileStore
+    var restaurantId : String
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -43,6 +44,7 @@ struct createLobbyView: View {
                 
                 Button(action:{
                     //try to send to server if success save lobby and change status in vm
+                    self.store.lobbyVM.postLobby(user: self.store.keychain.get("username")!,token: self.store.keychain.get("accessToken")!, restaurantId: self.restaurantId)
                 }){
                     Text("Submit")
                 }
@@ -51,9 +53,12 @@ struct createLobbyView: View {
             }
             Spacer()
         }
+        .alert(isPresented: $store.lobbyVM.showAlert){
+            Alert(title:Text(store.lobbyVM.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
+        }
         .background(Color(red: 240/255, green: 135/255, blue: 120/255))
         .navigationBarTitle("Create Lobby", displayMode: .inline)
-        
+         .resignKeyboardOnDragGesture()
     }
 }
 
@@ -74,12 +79,5 @@ struct MultilineTextView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
-    }
-}
-
-
-struct createLobbyView_Previews: PreviewProvider {
-    static var previews: some View {
-        createLobbyView()
     }
 }

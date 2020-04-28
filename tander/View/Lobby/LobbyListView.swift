@@ -20,7 +20,7 @@ struct LobbyListView: View {
             List(self.lobbyVM.lobbies) { lobby in
                 if lobby.lobbyStatus == "waiting" {
                     HStack {
-                        LobbyRowView(lobby: lobby, isExpanded: self.selection.contains(lobby))
+                        LobbyRowView(token: self.store.keychain.get("accessToken")!, lobby: lobby, isExpanded: self.selection.contains(lobby))
                             .onTapGesture { self.selectDeselect(lobby: lobby) }
                             
                             .animation(.linear(duration: 0.3))
@@ -40,7 +40,7 @@ struct LobbyListView: View {
             Alert(title:Text(lobbyVM.errMsg!), dismissButton: Alert.Button.default(Text("OK")))
         }
         .onAppear(){
-            self.lobbyVM.getLobbies(token: self.store.keychain.get("accessToken")!)
+            self.store.lobbyVM.getLobbies(token: self.store.keychain.get("accessToken")!)
         }
     }
     

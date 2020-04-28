@@ -36,8 +36,8 @@ struct RestaurantDetailView: View {
             
             HStack {
                 Spacer()
-                
-                NavigationLink(destination: createLobbyView().environmentObject(store)) {
+    
+                NavigationLink(destination: createLobbyView(restaurantId: restaurant._id).environmentObject(store)) {
                         Text("Create")
                 }
                 

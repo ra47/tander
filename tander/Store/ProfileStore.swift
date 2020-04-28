@@ -9,6 +9,7 @@
 import Foundation
 import KeychainSwift
 import Combine
+import SocketIO
 
 enum ProfileSignInStatus {
     case Loading, NotSignedIn, SignedIn
@@ -24,7 +25,7 @@ class ProfileStore : ObservableObject {
     
     @Published var lobbyVM = LobbyViewModel()
     
-
+    @Published var tabSelection = 2
     
     var keychain = KeychainSwift()
     //var token: String
@@ -63,6 +64,9 @@ class ProfileStore : ObservableObject {
     
     var anyCancellable: AnyCancellable? = nil
 
+    let manager = SocketManager(socketURL: URL(string: "http://127.0.0.1:9001")!, config: [.log(true), .compress])
+    var socket : SocketIOClient!
+    
     init() {
         //notice when nested Observedobject change will reload view
         anyCancellable = lobbyVM.objectWillChange.sink { (_) in
@@ -70,7 +74,25 @@ class ProfileStore : ObservableObject {
         }
         //clear to test login signin view cause profilesigninstatus to .notsignedin
         //keychain.clear()
+        socket = manager.defaultSocket
+        socket.connect()
+        addHandler()
+        
         profileSignInStatus = .Loading
+    }
+    
+    //handler socket function
+    func addHandler(){
+        
+        self.socket.on("update all lobbies") {_,_ in
+            self.lobbyVM.getLobbies(token: self.keychain.get("accessToken") ?? "")
+        }
+        //Debugging
+        self.socket.onAny {print("Got event: \($0.event), with items: \($0.items!)")}
+    }
+    
+    func disconnectSocket(){
+        self.socket.disconnect()
     }
     
     @Published var profileSignInStatus = ProfileSignInStatus.Loading {

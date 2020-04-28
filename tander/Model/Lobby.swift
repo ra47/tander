@@ -12,7 +12,7 @@ struct Lobby : Identifiable,Codable,Hashable {
     let id = UUID()
     let _id : String
     let lobbyName: String
-    let placeId : String
+    let restaurantId : String
     let startTime : String
     let description : String
     let hostUsername : String

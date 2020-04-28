@@ -10,10 +10,9 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var store:ProfileStore
-    @State private var selection = 2
     
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $store.tabSelection) {
             
             PromotionListView().environmentObject(store)
                 .tabItem {

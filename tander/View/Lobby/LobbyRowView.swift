@@ -12,8 +12,17 @@ struct LobbyRowView: View {
     
     var lobby : Lobby
     var isExpanded : Bool
-    
+    @ObservedObject var lobbyVM = LobbyViewModel()
+    var token : String
+
     let calendar = Calendar.current
+    
+    init(token : String, lobby : Lobby,isExpanded : Bool){
+        self.lobby = lobby
+        self.isExpanded = isExpanded
+        self.token = token
+        lobbyVM.getResName(token: token, body: lobby.restaurantId )
+    }
     
     var body: some View {
         
@@ -32,7 +41,7 @@ struct LobbyRowView: View {
                 
                 Text("\(lobby.participant.count)/\(lobby.maxParticipant)")
             }
-            Text(lobby.placeId)
+            Text(lobbyVM.restaurantName)
             .fontWeight(Font.Weight.medium)
             Text("Start at \(dateFormat(date: lobby.startTime))")
             

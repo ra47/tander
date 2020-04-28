@@ -77,6 +77,15 @@ class WebServices {
         fetchJSON(url: baseUrl + "/lobbies/", headers: ["Authorization": token], type: [Lobby].self, callback: callback)
     }
     
+    static func postLobby(lobby: [String : Any],restaurantId: String, token: String ,callback: ResponseCallback<Void>){
+        print(restaurantId)
+        postJSON(url: baseUrl + "/lobbies/restaurantId/\(restaurantId)", headers: ["Authorization": token] ,body: lobby, callback: callback)
+    }
+    
+    static func deleteLobby(id: String,token : String,callback: ResponseCallback<Void>){
+        deleteObject(url: baseUrl + "/lobbies/id/\(id)", headers: ["Authorization": token], callback: callback)
+    }
+    
     
     static func fetchJSON<T: Decodable>(url: String, headers: [String: String]? = nil, type: T.Type, callback: ResponseCallback<T>) {
         guard let url = URL(string: url) else { return }
@@ -122,10 +131,13 @@ class WebServices {
         }.resume()
     }
     
-    static func postJSON(url: String, body : [String: Any], callback: ResponseCallback<Void>){
+    static func postJSON(url: String, headers: [String: String]? = nil, body : [String: Any], callback: ResponseCallback<Void>){
         guard let url = URL(string: url) else { return }
         
         var request = URLRequest(url: url)
+        headers?.forEach { key, value in
+            request.addValue("Bearer \(value)", forHTTPHeaderField: key)
+        }
         request.httpMethod = "POST"
         
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
@@ -253,6 +265,39 @@ class WebServices {
                         DispatchQueue.main.async {
                             callback.onFailure(httpResponse.statusCode)
                         }
+                    }
+                }
+            }
+        }.resume()
+    }
+    
+    static func deleteObject(url: String, headers: [String: String]? = nil, callback: ResponseCallback<Void>) {
+        guard let url = URL(string: url) else { return }
+        
+        var request = URLRequest(url: url)
+        headers?.forEach { key, value in
+            request.addValue("Bearer \(value)", forHTTPHeaderField: key)
+        }
+        request.httpMethod = "DELETE"
+
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                DispatchQueue.main.async {
+                    callback.onError("Fetch Error: " + error!.localizedDescription)
+                }
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                if (httpResponse.statusCode == 200) {
+                    do {
+                        DispatchQueue.main.async {
+                            callback.onSuccess(Void())
+                        }
+                        
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        callback.onFailure(httpResponse.statusCode)
                     }
                 }
             }

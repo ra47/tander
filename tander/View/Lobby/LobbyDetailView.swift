@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LobbyDetailView: View {
     
+    @EnvironmentObject var store:ProfileStore
     @ObservedObject var lobbyVM : LobbyViewModel
     var lobby : Lobby
     
@@ -20,7 +21,7 @@ struct LobbyDetailView: View {
                 //Restaurant Name
                 HStack{
                     Spacer()
-                    Text(lobby.placeId)
+                    Text(store.lobbyVM.restaurantName)
                         .font(Font.custom("HelveticaNeue-Bold", size: 24))
                 }
                 .padding()
@@ -76,23 +77,24 @@ struct LobbyDetailView: View {
                 }
                 
                 if lobbyVM.participantStatus == ParticipantStatus.host{
-                    //start leave
-                    //if start send status from waiting to eating
-                    //set pageStatus all to Eating,Finish
-                    EmptyView()
+                    Button(action: {
+                        self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
+                    }){
+                        Text("Leave")
+                    }
                 }else{
-                    //leave set pageStatus to list and participantstatus to notParticipated
-                    EmptyView()
+                    //post update remove from list
                 }
                 
                 Spacer()
             }
             .navigationBarTitle(Text(lobby.lobbyName),displayMode: .inline)
-            .navigationBarItems(leading: Button(action:{
-                self.lobbyVM.pageStatus = PageStatus.list
-            }){
-                Text("Back")
-            })
+//            .navigationBarItems(leading: Button(action:{
+//                self.lobbyVM.pageStatus = PageStatus.list
+//            }){
+//                
+//                Text("Back")
+//            })
         }
     }
     
