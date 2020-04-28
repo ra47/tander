@@ -34,7 +34,9 @@ struct RestaurantDetailView: View {
             
             HStack {
                 Spacer()
-                Button(action:{}){
+                Button(action:{
+                    
+                }){
                     Text("Create")
                 }
                 .padding(.all , 5)

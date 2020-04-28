@@ -8,6 +8,7 @@
 
 import Foundation
 import KeychainSwift
+import Combine
 
 enum ProfileSignInStatus {
     case Loading, NotSignedIn, SignedIn
@@ -20,6 +21,10 @@ class ProfileStore : ObservableObject {
     @Published var showWelcome = false
 
     @Published var isShowing = false
+    
+    @Published var lobbyVM = LobbyViewModel()
+    
+
     
     var keychain = KeychainSwift()
     //var token: String
@@ -56,7 +61,13 @@ class ProfileStore : ObservableObject {
     @Published var owner = [String]()
     @Published var birthdate = Date()
     
+    var anyCancellable: AnyCancellable? = nil
+
     init() {
+        //notice when nested Observedobject change will reload view
+        anyCancellable = lobbyVM.objectWillChange.sink { (_) in
+            self.objectWillChange.send()
+        }
         //clear to test login signin view cause profilesigninstatus to .notsignedin
         //keychain.clear()
         profileSignInStatus = .Loading

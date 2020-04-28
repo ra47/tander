@@ -102,7 +102,7 @@ class WebServices {
                         let jsonData = try decoder.decode(type, from: data)
                         
                         print("JOSN DECODER RESULT")
-                        print(jsonData)
+                        //print(jsonData)
                         
                         DispatchQueue.main.async {
                             callback.onSuccess(jsonData)
