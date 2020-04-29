@@ -13,7 +13,7 @@ enum ParticipantStatus {
 }
 
 enum PageStatus {
-    case list, detail, eating, finished
+    case list, detail, eating, editing
 }
 
 class LobbyViewModel: ObservableObject {
@@ -78,6 +78,42 @@ class LobbyViewModel: ObservableObject {
         let time = dateLongFormatter.string(from: startTime)
         
         let lobby = [
+            "lobbyName" : lobbyName,
+            "restaurantId" : restaurantId,
+            "startTime" :  time,
+            "description" : lobbyDesc,
+            "participant" : [user],
+            "hostUsername" : user,
+            "maxParticipant" : maxParticipants,
+            "lobbyStatus" : "waiting"
+            ] as [String : Any]
+        WebServices.postLobby(lobby: lobby, restaurantId: restaurantId, token: token, callback: ResponseCallback(onSuccess: { (_) in
+            WebServices.getLobbies(token: token, callback: ResponseCallback(onSuccess: { lobbies in
+                for lobby in lobbies {
+                    if lobby.lobbyName == self.lobbyName{
+                        self.selectedLobby = lobby
+                        self.pageStatus = PageStatus.detail
+                        self.participantStatus = ParticipantStatus.host
+                        self.getResName(token: token,body: lobby.restaurantId)
+                    }
+                }
+            }, onFailure: { (statusCode) in
+                self.errMsg = "\(statusCode)"
+            }, onError: { (errMsg) in
+                self.errMsg = "get lobby\(errMsg)"
+            }))
+        }, onFailure: { (statusCode) in
+            self.errMsg = "\(statusCode)"
+        }, onError: { (errMsg) in
+            self.errMsg = "\(errMsg)"
+        }))
+    }
+    
+    func editLobby(user: String ,token: String ,restaurantId: String){
+        let time = dateLongFormatter.string(from: startTime)
+        
+        let lobby = [
+            "_id" : selectedLobby._id,
             "lobbyName" : lobbyName,
             "restaurantId" : restaurantId,
             "startTime" :  time,

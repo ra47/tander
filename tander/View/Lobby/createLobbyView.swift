@@ -42,14 +42,33 @@ struct createLobbyView: View {
                     .labelsHidden()
                 Text("Start at: \(store.lobbyVM.formatTime())")
                 
-                Button(action:{
-                    //try to send to server if success save lobby and change status in vm
-                    self.store.lobbyVM.postLobby(user: self.store.keychain.get("username")!,token: self.store.keychain.get("accessToken")!, restaurantId: self.restaurantId)
-                }){
-                    Text("Submit")
+                if store.lobbyVM.pageStatus != PageStatus.editing {
+                    Button(action:{
+                        //try to send to server if success save lobby and change status in vm
+                        self.store.lobbyVM.postLobby(user: self.store.keychain.get("username")!,token: self.store.keychain.get("accessToken")!, restaurantId: self.restaurantId)
+                    }){
+                        Text("Submit")
+                    }
+                    .buttonStyle(WhiteColorBtn())
+                    .padding(.top, 30)
+                } else {
+                   Button(action:{
+                        //try to send to server if success save lobby and change status in vm
+                        self.store.lobbyVM.editLobby(user: self.store.keychain.get("username")!,token: self.store.keychain.get("accessToken")!, restaurantId: self.restaurantId)
+                    }){
+                        Text("Save Change")
+                    }
+                    .buttonStyle(WhiteColorBtn())
+                    .padding(.top, 30)
+                    
+                    Button(action: {
+                        self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
+                    }){
+                        Text("Delete")
+                    }
+                    .buttonStyle(WhiteColorBtn())
+                    .padding(.top, 15)
                 }
-                .buttonStyle(WhiteColorBtn())
-                .padding(.top, 30)
             }
             Spacer()
         }

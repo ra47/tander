@@ -24,8 +24,8 @@ struct LobbyRootView: View {
             return AnyView(LobbyDetailView(lobbyVM: store.lobbyVM, lobby: store.lobbyVM.selectedLobby).environmentObject(store))
         case .eating:
             return AnyView(Text("eating"))
-        case .finished:
-            return AnyView(Text("Finished"))
+        case .editing:
+            return AnyView(createLobbyView(restaurantId: store.lobbyVM.selectedLobby.restaurantId).environmentObject(store))
         }
     }
 

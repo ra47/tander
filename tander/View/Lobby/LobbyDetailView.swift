@@ -77,17 +77,21 @@ struct LobbyDetailView: View {
                 
                 if lobby.lobbyStatus == "waiting" {
                     if lobbyVM.participantStatus == ParticipantStatus.host{
-                        HStack{
+                        VStack{
                             Button(action: {
                                 self.store.lobbyVM.updateLobby(lobby: self.lobby,token: self.store.keychain.get("accessToken")!)
                             }){
                                 Text("Start Eating")
                             }
+                            .buttonStyle(WhiteColorBtn())
+                            .padding(.top, 30)
                             Button(action: {
-                                self.store.lobbyVM.deleteLobby(token: self.store.keychain.get("accessToken")!)
+                                self.store.lobbyVM.pageStatus = PageStatus.editing
                             }){
-                                Text("Delete Lobby")
+                                Text("Edit Lobby")
                             }
+                            .buttonStyle(WhiteColorBtn())
+                            .padding(.top, 30)
                         }
                     }else{
                         Button(action: {
@@ -95,6 +99,8 @@ struct LobbyDetailView: View {
                         }){
                             Text("Leave Lobby")
                         }
+                        .buttonStyle(WhiteColorBtn())
+                        .padding(.top, 30)
                     }
                 } else {
                     if lobbyVM.participantStatus == ParticipantStatus.host{
@@ -104,6 +110,8 @@ struct LobbyDetailView: View {
                             }){
                                 Text("Finish Eating")
                             }
+                            .buttonStyle(WhiteColorBtn())
+                            .padding(.top, 30)
                         }
                     }
                 }
