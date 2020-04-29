@@ -13,7 +13,7 @@ struct Restaurant: Codable,Hashable,Identifiable {
     let id = UUID()
     let _id: String
     let categories: [String]?
-    let placeID: String?
+    //let placeID: String?
     let name: String?
     let url: String?
     let startPrice: Int?

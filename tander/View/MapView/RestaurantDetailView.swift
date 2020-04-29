@@ -65,6 +65,6 @@ struct RestaurantDetailView: View {
 struct RestaurantDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
-        RestaurantDetailView(restaurant:  Restaurant(_id: "test", categories: ["thai"], placeID: "test", name: "example Annotation", url: "", startPrice: 199, address: "Kasetsart", position: Restaurant.cod(lat: 13.8476, lon: 100.5696), isPartner: false))
+        RestaurantDetailView(restaurant:  Restaurant(_id: "test", categories: ["thai"], name: "example Annotation", url: "", startPrice: 199, address: "Kasetsart", position: Restaurant.cod(lat: 13.8476, lon: 100.5696), isPartner: false))
     }
 }

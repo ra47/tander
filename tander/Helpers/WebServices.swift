@@ -88,12 +88,12 @@ class WebServices {
     
     
     static func fetchJSON<T: Decodable>(url: String, headers: [String: String]? = nil, type: T.Type, callback: ResponseCallback<T>) {
-        guard let url = URL(string: url) else { return }
-        
+        guard let url = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else { return }
         var request = URLRequest(url: url)
         headers?.forEach { key, value in
             request.addValue("Bearer \(value)", forHTTPHeaderField: key)
         }
+        
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
