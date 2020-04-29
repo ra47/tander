@@ -45,10 +45,10 @@ struct RestaurantDetailView: View {
                 .background(Color.gray)
                 .foregroundColor(Color.white)
                 
-                Button(action:{}){
-                    Text("Join")
-                }
-                    
+//                Button(action:{}){
+//                    Text("Join")
+//                }
+//                    
                 .padding(.all , 5)
                 .background(Color.gray)
                 .foregroundColor(Color.white)
