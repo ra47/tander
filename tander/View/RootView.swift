@@ -31,7 +31,7 @@ struct RootView: View {
             LobbyRootView().environmentObject(store)
                 .tabItem {
                     Image(systemName: "person.3.fill")
-                    Text("Lobby")
+                    Text("Nearby")
             }
             .tag(3)
             
