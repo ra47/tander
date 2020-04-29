@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		110757C723D1CE92003B5EB4 /* SignInWithAppleBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110757C623D1CE92003B5EB4 /* SignInWithAppleBtn.swift */; };
 		11182B2A23D1C30D00DEBCDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B2923D1C30D00DEBCDA /* AppDelegate.swift */; };
 		11182B2C23D1C30D00DEBCDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11182B2B23D1C30D00DEBCDA /* SceneDelegate.swift */; };
 		11182B3023D1C30F00DEBCDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11182B2F23D1C30F00DEBCDA /* Assets.xcassets */; };
@@ -88,7 +87,6 @@
 		06EFBB67DB782344200451E1 /* libPods-tander.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tander.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1100DDDC23FECEFD00B13E88 /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		110757C423D1CE50003B5EB4 /* tander.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tander.entitlements; sourceTree = "<group>"; };
-		110757C623D1CE92003B5EB4 /* SignInWithAppleBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleBtn.swift; sourceTree = "<group>"; };
 		11182B2623D1C30D00DEBCDA /* tander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11182B2923D1C30D00DEBCDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11182B2B23D1C30D00DEBCDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 		110757C523D1CE78003B5EB4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				110757C623D1CE92003B5EB4 /* SignInWithAppleBtn.swift */,
 				116B1FB423F5CC1D005D51AE /* LoadingView.swift */,
 				11E38AD72452FDB000F5CD34 /* ImageView.swift */,
 			);
@@ -555,7 +552,6 @@
 				116B1FB323F5B32C005D51AE /* ContentView.swift in Sources */,
 				1170E72123D466DB00181873 /* WebServices.swift in Sources */,
 				11E38AD42452DD8100F5CD34 /* ImageLoader.swift in Sources */,
-				110757C723D1CE92003B5EB4 /* SignInWithAppleBtn.swift in Sources */,
 				111BB46423F7E74C00CE4420 /* MapViewModel.swift in Sources */,
 				11C82C4C24168DA7006BBEC6 /* RestaurantDetailView.swift in Sources */,
 				111BB46223F7E72700CE4420 /* Restaurant.swift in Sources */,
